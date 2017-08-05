@@ -15,3 +15,160 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+* {
+ border-radius: 0 !important;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.well {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#wrapper {
+ padding-bottom: 140px;
+}
+
+// SIDEBAR
+#sidebar {
+ height: 100%;
+}
+
+#sidebar:hover {
+//  background: rgba(137, 60, 194, 0.2);
+}
+
+.services-list > tbody > tr > th,
+.services-list > tbody > tr > td {
+    padding: 0px;
+    font-size: .8em;
+    line-height: 2em;
+}
+
+
+
+
+
+// MAIN PANEL
+#main-panel {
+ background: rgba(231, 209, 55, 0.71);
+ height: 100%;
+}
+
+// NAVBAR UPDATES:
+.navbar-inverse {
+    background-color: #e7d137;
+    border-color: #aa9922;
+    .navbar-nav > li > a {
+     color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+.navbar-brand > img {
+  height: 100%;
+}
+
+
+// FOOTER (STICKY)
+.footer {
+  // sticky footer
+    position: absolute;
+    bottom: 0;
+    
+    width: 100%;
+    height: 140px;
+    line-height: 60px;
+    background-color: rgb(34,34,34);
+    margin-top: 1em;
+    
+    color: #9d9d9d !important;
+      a {
+        color: #9d9d9d;
+      }
+      a:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+}
+
+.services-list {
+    -webkit-padding-start: 0px;
+    
+    li {
+        list-style: none;
+    }
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #b3c0a4;
+}
+
+
+@media (max-width: 575px) { 
+    
+body {
+    font-size: 14px;
+}
+  
+  .container-fluid {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+  
+  .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+  .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+  .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+  .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+  .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+  .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+  .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+  .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+  .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+  .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+  .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+  .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+  
+  .row {
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+  }
+  
+  .well {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .panel-heading {
+      padding: 10px 5px;
+  }
+  
+  .panel-body {
+    padding: 5px;
+  }
+  
+  #formula-header {
+      font-size: 12px;
+  }
+  
+}

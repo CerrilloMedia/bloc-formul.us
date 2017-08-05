@@ -1,2 +1,105 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+ <div class="col-xs-12 col-lg-10 col-lg-offset-1 dashboard">
+     <div id="sidebar" class="col-sm-3 hidden-xs">
+        <% if current_user.artist? %>
+        
+            <div id="upcoming-list" class="panel-body row">
+                <h4>Upcoming Services</h4>
+                <table class="table services-list">
+                    <tr>
+                        <th class="text-left">salon/artist</th>
+                        <th class="t-date text-right">date</th>
+                    </tr>
+                    <tr>
+                        <td class="text-left">User/Artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">salon/artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">User/Artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="history-list" class="panel-body row">
+                 <h4>Service History</h4>
+                <table class="table services-list">
+                    <tr>
+                        <th class="text-left">salon/artist</th>
+                        <th class="t-date text-right">date</th>
+                    </tr>
+                    <tr>
+                        <td class="text-left">User/Artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">salon/artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">User/Artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                </table>
+            </div>
+        <% else %>
+            <div id="history-list" class="panel-body row">
+                 <h4>Service History</h4>
+                <table class="table services-list">
+                    <tr>
+                        <th class="text-left">salon/artist</th>
+                        <th class="t-date text-right">date</th>
+                    </tr>
+                    <tr>
+                        <td class="text-left">User/Artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">salon/artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">User/Artist</td>
+                        <td class="t-date text-right">date</td>
+                    </tr>
+                </table>
+            </div>
+         <% end %>
+     </div>
+     
+     <div class="col-xs-12 col-sm-9" id="main-panel">
+         <div id="user-header" class="panel-heading">
+             <span class="">user:</span> <%= @user.email %><br>
+             Service: Partial Balayage & One Step Color<br>
+             
+         </div>
+         <div class="col-xs-12 well">
+             <div id="formula-header" class="">
+                 <span class="pull-left">Formula:</span><span class="pull-right">date: 1/01/17</span>
+             </div>
+             <span class="col-xs-12"><hr class="row"></span>
+             <div id="formula-body" class="col-xs-12 float-left">
+                 Base: 60g.5N 20g.6N 5g.BG 2g.Deep.BB 15v Classic
+             </div>
+         </div>
+         <div id="formula-client-note" class="formula-note col-xs-12 well">
+             <div class="note-header">
+                 Note header [public/private] & date_created
+             </div>
+             <div class="note-body">
+                 Note body
+             </div>
+         </div>
+         <div id="formula-artist-note" class="formula-note col-xs-12 well">
+             <div class="note-header">
+                 Note header [public/private] & date_created
+             </div>
+             <div class="note-body">
+                 Note body
+             </div>
+         </div>
+         
+     </div>
+ </div>

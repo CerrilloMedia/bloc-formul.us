@@ -8,34 +8,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
+<div id="wrapper">
+  <div class="container-fluid">
     
-    <nav>
-    <ul class="nav nav-tabs">
-      <li>
-        <% if user_signed_in? %>
-          <%= link_to "Formulus", current_user, title: "dashboard" %>
-        <% else %>
-          <%= link_to "Formulus", root_path, title: "home" %>
-        <% end %>
-      </li>
-      <% if user_signed_in? %>
-        <li class="pull-right">
-          <%= link_to destroy_user_session_path, method: :delete, class: 'navbar-link', title: 'Sign out' do %>
-            <span class="glyphicon glyphicon-log-out"></span>
+    <div class="row">
+      <nav class="navbar navbar-toggleable-lg navbar-inverse">
+        <div class="navbar-header">
+          
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          
+          <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand', title: 'Cerrillo Media' do %>
+            Formul.us
           <% end %>
-        </li>
-        <li class="pull-right">
-          <%= link_to edit_user_registration_path, class: 'navbar-link', title: 'edit profile' do %>
-            <strong><%= current_user.email %></strong>
-          <% end %>
-        </li>
-      <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %></li>
-        <li><%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %></li>
-      <% end %>
-    </ul>  
-  </nav>
+          
+        </div>
+          <div class="navbar-collapse collapse" id="theNavbar">
+            <% if current_user && current_user.artist? %>
+              <ul class="nav navbar-nav nav-bar-left">
+                <li>
+                  <%= link_to 'New Client', "#", class: 'nav-link' %>
+                </li>
+              </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="nav-item float-sm-right"><%= link_to "Logged in as: #{current_user.email}", user_path(current_user), class: 'nav-link' %></li>
+            <% elsif !current_user %>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="nav-item float-sm-right"><%= link_to "Login", new_user_session_path, class: 'nav-link' %></li>
+              <li class="nav-item float-sm-right"><%= link_to "Sign Up", new_user_registration_path, class: 'nav-link' %></li>
+            </ul>
+            <% end %>
+          </div>    
+      </nav>
+    </div>
+
     <!-- Flash Notices & Alerts -->
     <% if flash[:notice] %>
       <div class="alert alert-success">
@@ -49,9 +58,29 @@
       </div>
     <% end %>
  
-<%= yield %>
-
+    <div class="row">
+      <%= yield %>
+    </div>
+    
+    <div class="footer bg-inverse row text-center">
+        
+        <%= link_to root_path, class:'col-sm-4 text-left pull-left' do %>
+          &copy; Formulus &copy; 2017
+        <% end %>
+        
+        <% if !current_user %>
+          <%= link_to new_user_session_path, class: 'col-sm-4 pull-right text-right', title: 'Log-in' do %>
+            Sign-in <span class="glyphicon glyphicon-log-in text-default"></span>
+          <% end %>
+        <% else %>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'col-sm-4 pull-right text-right', title: 'Log-out' do %>
+            Sign-out <span class="glyphicon glyphicon-log-out text-default"></span>
+          <% end %>
+        <% end %>
+        
+    </div>
 
   </div>
+</div>
 </body>
 </html>
