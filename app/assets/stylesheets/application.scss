@@ -15,10 +15,8 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
-
-* {
- border-radius: 0 !important;
-}
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
 
 html {
   height: 100%;
@@ -36,16 +34,107 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 5px;
 }
 
-.well {
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #b3c0a4;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+// REMOVE BORDER-RADIUS
+.panel, .well {
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+
+// BUTTON OVERRIDES
+.btn-default {
+  border-color: #31778F !important;
+}
+
+.btn {
+  border: 2px solid transparent;
+  // padding: .5em .8em;
+  font-size: .9em;
+  line-height: 1em;
+  border-radius: 2em !important;
+}
+
+.btn-success {
+  color: #ffffff;
+  background-color: #31778f;
+  border-color: #31778F !important;
+}
+
+.btn-success:hover, .btn-success:active, .btn-success:focus {
+  color: #fff;
+  background-color: #31778f;
+}
+
+.btn-success:active:hover, .btn-success:active:focus {
+  background-color: #245769;
+}
+
+.btn-danger {
+  color: #31778f;
+  background-color: #ffffff;
+  border-color: #31778F !important;
+}
+
+.btn-danger:hover, .btn-danger:active, .btn-danger:focus {
+  color: #fff;
+  background-color: #31778f;
+}
+
+.btn-danger:active:hover, .btn-danger:active:focus {
+  background-color: #245769;
+}
+.alert {
+  margin-top: -20px;
+  padding: 5px;
+}
+
+.panel, .well {
     padding: 10px;
     margin-bottom: 10px;
 }
 
 #wrapper {
- padding-bottom: 140px;
+ padding-bottom: 60px;
 }
 
+// WELCOME#INDEX
+.splash-jumbotron {
+  display: flex;
+}
+
+.jumbo-icon {
+  font-size: 4em;
+  color: #364156;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.benefits-panel {
+  margin-bottom: 2em;
+  .user-links {
+    .bt {
+    border-radius: 2px !important;
+    }
+  }
+}
+
+.benefits-heading {
+    padding: .5em 0em;
+    color: #cdcdcd;
+    background: #364156;
+}
+
+
 // SIDEBAR
+
 #sidebar {
  height: 100%;
 }
@@ -54,34 +143,76 @@ h1, h2, h3, h4, h5, h6 {
 //  background: rgba(137, 60, 194, 0.2);
 }
 
-.services-list > tbody > tr > th,
-.services-list > tbody > tr > td {
+.services-list > tbody {
+  tr {
+    th, td {
     padding: 0px;
     font-size: .8em;
     line-height: 2em;
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+  tr:hover {
+    // background: rgba(231, 209, 55, 0.5) !important;
+    cursor: pointer;
+  }
 }
-
-
-
 
 
 // MAIN PANEL
 #main-panel {
- background: rgba(231, 209, 55, 0.71);
+// background: rgba(231, 209, 55, 0.71);
  height: 100%;
+}
+
+#user-header {
+  padding: 5px 5px;
+}
+
+.user-links {
+  .btn-default {
+    // background: rgba(231, 209, 55, 0.5) !important;
+    // margin-bottom:.2em;
+  }
+}
+
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.btn-group > .btn:last-child:not(:first-child):not(.dropdown-toggle) {
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+
+#formula-header {
+  .formula-service-type {
+    font-size: 1.3em;
+  }
+  .formula-date {
+    font-size: 0.75em;
+    padding: .4em;
+  }
 }
 
 // NAVBAR UPDATES:
 .navbar-inverse {
-    background-color: #e7d137;
+    background-color: #31778f;
     border-color: #aa9922;
     .navbar-nav > li > a {
-     color: rgba(0, 0, 0, 0.7);
+     color: rgba(255, 255, 255, 0.7);
     }
-}
-
-.navbar-brand > img {
-  height: 100%;
+    a.navbar-brand {
+      color: white;
+    }
+  .navbar-brand > img {
+    height: 100%;
+  } 
 }
 
 
@@ -92,7 +223,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     
     width: 100%;
-    height: 140px;
+    height: 60px;
     line-height: 60px;
     background-color: rgb(34,34,34);
     margin-top: 1em;
@@ -107,25 +238,52 @@ h1, h2, h3, h4, h5, h6 {
       }
 }
 
+// USERS#SHOW
 .services-list {
-    -webkit-padding-start: 0px;
-    
+    -webkit-padding-start: 0px;   
     li {
         list-style: none;
     }
 }
 
-hr {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-bottom: 1px solid #b3c0a4;
+table.formula-history {
+  tr {
+    th {
+      border-top:none;
+    }
+  }
+}
+
+// USERS#FORMULA#NEW/EDIT
+
+.formula-card-header {
+  background: #56e39f;
+  color: white;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Niconne', cursive;
+  line-height: 1em;
+}
+
+.formula-card {
+  border: 1px solid #56E39F;
+  .xs-input {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+      border-radius: 0 !important;
+  }
 }
 
 
-@media (max-width: 575px) { 
+@media (max-width: 420px) { 
     
 body {
-    font-size: 14px;
+    font-size: 16px;
 }
   
   .container-fluid {
@@ -149,6 +307,10 @@ body {
     padding-right: 5px !important;
   }
   
+  .btn {
+    font-size: 1em !important;
+  }
+  
   .row {
     margin-left: -5px !important;
     margin-right: -5px !important;
@@ -157,6 +319,11 @@ body {
   .well {
     padding: 10px;
     margin-bottom: 15px;
+  }
+ // PANELS  
+  .panel {
+    // border: none !important;
+    // font-size: 1.4em;
   }
   
   .panel-heading {
@@ -167,8 +334,33 @@ body {
     padding: 5px;
   }
   
+  .panel-footer {
+    padding: 5px;
+  }
+  
+  .table {
+    // font-size: .8em;
+  }
+  
+  // 
   #formula-header {
-      font-size: 12px;
+      font-size: 1em;
+      margin-bottom: .3em;
+  }
+  
+  .user-links {
+    // border-color: #31778F;
+    a:first-child {
+      margin-bottom: 1px;
+    }
+  }
+  
+  .form-control {
+    font-size: 16px;
+  }
+  
+  .jumbo-icon {
+    font-size: 3em;
   }
   
 }

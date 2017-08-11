@@ -1,2 +1,84 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="jumbotron splash-jumbotron">
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Keeping track of your amazing hair color...<br><small>because finding the perfect stylist is difficult enough!</small></h2>
+  </div>
+</div>
+
+<div class="col-xs-12 text-center benefits-panel">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="h2 benefits-heading">
+        <strong>Salon Guests</strong>
+      </div>
+      
+      <div class="col-xs-12 col-sm-4">
+        <div class="jumbo-icon h1">
+          <i class="fa fa-group"></i>
+        </div>
+        <p>Create, update & maintain personalized forumlations accross brands, salons and artists.</p>
+      </div>
+      
+      <div class="col-xs-12 col-sm-4">
+        <div class="jumbo-icon h1">
+          <i class="fa fa-list"></i>
+          <i class="fa fa-heart-o"></i>
+        </div>
+        <p>Keep track and bookmark your most succesful formulas.</p>
+      </div>
+      
+      <div class="col-xs-12 col-sm-4">
+        <div class="jumbo-icon h1">
+            <i class="fa fa-edit"></i>
+            <i class="fa fa-share-alt"></i>
+        </div>
+        <p>Include personalized notes to each formula, rate & share them with your stylist.</p>
+      </div>
+      <br>
+      <div class="user-links col-xs-12">
+        <%= link_to new_user_registration_path, class: 'btn btn-success' do %>
+          <i class="fa fa-sign-in"></i> Sign Up!
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-xs-12 text-center benefits-panel">
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="h2 benefits-heading">
+        <strong>Salon Professionals</strong>
+      </div>
+      
+      <div class="col-xs-12 col-sm-4">
+        <div class="jumbo-icon h1">
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <p>Quickly access guest formula history.</p>
+      </div>
+      
+      <div class="col-xs-12 col-sm-4">
+        <div class="jumbo-icon h1">
+          <i class="fa fa-edit"></i>
+          <i class="fa fa-comments-o"></i>
+        </div>
+        <p>Include personalized notes for each formulation & share with your guest.</p>
+      </div>
+      
+      <div class="col-xs-12 col-sm-4">
+        <div class="jumbo-icon h1">
+            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-check-square-o"></i>
+        </div>
+        <p>Keep track and maintain color inventory with Forcasting.</p>
+      </div>
+      
+      <div class="user-links col-xs-12">
+        <%= link_to new_user_registration_path, class: 'btn btn-success' do %>
+          <i class="fa fa-sign-in"></i> Sign Up!
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
