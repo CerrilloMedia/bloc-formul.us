@@ -207,6 +207,13 @@ a {
     .navbar-nav > li > a {
      color: rgba(255, 255, 255, 0.7);
     }
+    .navbar-brand {
+      font-family: 'Niconne', cursive;
+      float: left;
+      padding: .5em;
+      font-size: 1.5em;
+      line-height: 1em;
+    }
     a.navbar-brand {
       color: white;
     }
