@@ -76,7 +76,7 @@
       </div>  
     <% end %>
     
-    <% if current_user.errors.full_messages.any? %>
+    <% if current_user && current_user.errors.full_messages.any? %>
       <% current_user.errors.full_messages.each do |error_message| %>
         <%= error_message if current_user.errors.full_messages.first == error_message %> <br />
       <% end %>
