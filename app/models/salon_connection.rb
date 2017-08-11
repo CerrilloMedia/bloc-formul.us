@@ -5,22 +5,23 @@ class SalonConnection < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => :salon_user_id
   
   validate :check_for_self
-  validate :users_are_not_already_friends
+  validate :check_for_connection
   
   private
   
   def check_for_self
      if user.id == salon_user.id
-         self.errors.add(:salon_connection, "Cannot connect to yourself.")
+         self.errors.add(:user, "Cannot connect to yourself.")
      end
   end
   
-  def users_are_not_already_friends
-      combinations = ["user_id = #{user_id} AND salon_user_id = #{salon_user_id}",
-      "user_id = #{salon_user_id} AND salon_user_id = #{user_id}"]
-      if SalonConnection.where(combinations.join(' OR ')).exists?
-          self.errors.add(:salon_connection, 'Already friends!')
-      end
+  def check_for_connection
+        combinations = ["user_id = #{user_id} AND salon_user_id = #{salon_user_id}",
+        "user_id = #{salon_user_id} AND salon_user_id = #{user_id}"]
+        connection = SalonConnection.where(combinations.join(' OR '))
+        if connection.exists?
+            self.errors.add(:salon_connection, 'Already friends!')
+        end
   end
-  
+        
 end
