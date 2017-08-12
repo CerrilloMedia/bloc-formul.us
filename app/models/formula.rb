@@ -16,9 +16,11 @@ class Formula < ActiveRecord::Base
         end
     end
     
+    default_scope { order('id DESC') }
+    
     def set_salon_connection
         artist = User.find(artist_id)
-        self.salon_connection_id = current_match || current_match
+        self.salon_connection_id = current_match.first.id || nil
     end
     
     def current_match

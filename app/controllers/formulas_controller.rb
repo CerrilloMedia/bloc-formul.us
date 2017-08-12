@@ -34,20 +34,16 @@ class FormulasController < ApplicationController
                 else
                   Formula.new(formula_params)
                 end
-                
-    # if duplication request is not from original author, set current_user (requestor) as new artist_id
-    @formula.artist_id = current_user.id
     
-    unless current_user.artist?
-      @formula.artist_id, @formula.client_id = @formula.client_id, @formula.artist_id
+    if params[:copy] && current_user.client?
+      @formula.client_id = current_user.id
     end
     
     if @formula.save 
       flash[:notice] = params[:copy] ? "Formula successfully copied" : "NEW Formula saved!"
       redirect_to current_user.artist? ? @formula : current_user
     else
-      flash[:alert] = "Error saving formula. Please try again"
-      puts @formula.errors.messages
+      flash[:alert] = @formula.errors.messages
       redirect_to request.referrer
     end
     
@@ -57,9 +53,9 @@ class FormulasController < ApplicationController
     @formula = Formula.find(params[:id])
     @user = User.find(@formula.client_id)
     # only original artist can edit their formula
-    unless current_user.artist? && current_user.id == @formula.artist_id
+    unless current_user.id == @formula.artist_id
       flash[:alert] = "Only the original author can edit this formula"
-      redirect_to request.referrer
+      redirect_to request.referrer || current_user
     end
     
   end

@@ -16,12 +16,18 @@ class SalonConnection < ActiveRecord::Base
   end
   
   def check_for_connection
+      puts "Check for connection:"
         combinations = ["user_id = #{user_id} AND salon_user_id = #{salon_user_id}",
         "user_id = #{salon_user_id} AND salon_user_id = #{user_id}"]
-        connection = SalonConnection.where(combinations.join(' OR '))
-        if connection.exists?
+        if SalonConnection.where(combinations.join(' OR ')).exists?
             self.errors.add(:salon_connection, 'Already friends!')
         end
   end
+  
+#   def self.salon_connection(current_user_id, user_id)
+#     combinations = ["user_id = #{current_user_id} AND salon_user_id = #{user_id}",
+#     "user_id = #{user_id} AND salon_user_id = #{current_user_id}"]
+#     @salon_connection = SalonConnection.where(combinations.join(' OR '))
+#   end
         
 end

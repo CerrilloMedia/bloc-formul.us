@@ -10,36 +10,8 @@
   </div>
 </div>
                     <!-- User Links -->
-                      <% if current_user %>
-                        <div class="user-links">
-                            <% if @connections.include?(@user.id) %>
-                                <% if @formula %>
-                                    <%= link_to formulas_path(copy: @formula.id), method: :create, class: 'btn btn-sm btn-default' do %>
-                                        <%= icon('copy') %> <span class="hidden-xs">copy latest formula</span>
-                                    <% end %>
-                                <% end %>
-                                
-                                <%= link_to new_formula_path(requested_user: @user), class: 'btn btn-sm btn-default' do %>
-                                    <%= icon('pencil-square-o') %> new formula</span>
-                                <% end %>
-                                
-                                <div class='user-links btn-group pull-right'>
-                                    <%= link_to salon_connection_path(@user.id), class: 'btn btn-sm btn-success', method: :delete, title: "Remove Connection" do %>
-                                        <i class="fa fa-user-times"></i>
-                                    <% end %>
-                                </div>
-                            <% else %>
-                            
-                                <div class='user-links btn-group'>
-                                    <%= link_to salon_connections_path(salon_user_id: @user.id), class: 'btn btn-sm btn-success', method: :post, title: "Create Connection" do %>
-                                        <i class="fa fa-user-plus"></i> Connect to create a formula
-                                    <% end %>
-                                </div>
-                                
-                            <% end %>
-                        </div>
-                    <% end %>
-
+                    <%= render partial: 'users/user_links', locals: {connections: @connections, user: @user, formula: @formula } %>
+                      
   <table class="table formula-history">
     <tr>
       <th class="col-xs-2">
@@ -69,7 +41,7 @@
           <%= link_to edit_formula_path(formula.id), class:"btn btn-sm btn-default ml-1 col-xs-12", title:"edit formula" do %>
             <%= icon('pencil-square-o') %><span class="hidden-xs"> edit</span>
           <% end %>
-          <%= link_to formulas_path(id: formula.id), method: :post, class: 'btn btn-sm btn-default ml-1 col-xs-12' do %>
+          <%= link_to formulas_path(copy: formula.id), method: :post, class: 'btn btn-sm btn-default ml-1 col-xs-12' do %>
             <%= icon('copy') %><span class="hidden-xs">copy</span>
           <% end %>
         <% end %>

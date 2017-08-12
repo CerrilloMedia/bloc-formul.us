@@ -18,6 +18,10 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+* {
+  font-family: 'Muli', sans-serif;
+}
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -44,10 +48,16 @@ a {
   text-decoration: none !important;
 }
 
-// REMOVE BORDER-RADIUS
+// PANELS & WELLS
 .panel, .well {
   border-radius: 0 !important;
   box-shadow: none;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.panel-body {
+  padding: 5px;
 }
 
 // BUTTON OVERRIDES
@@ -95,11 +105,6 @@ a {
 .alert {
   margin-top: -20px;
   padding: 5px;
-}
-
-.panel, .well {
-    padding: 10px;
-    margin-bottom: 10px;
 }
 
 #wrapper {
@@ -200,6 +205,22 @@ a {
   }
 }
 
+#formula-formulation {
+  line-height: 1.5em;
+  min-height: 4.5em;
+  position: relative;
+  .formula-card-backgrond {
+    width: 100%;
+  }
+}
+
+.formula-card-date {
+  color: #31778f;
+    font-style: italic;
+    opacity: .7;
+    font-size:.8em;
+}
+
 // NAVBAR UPDATES:
 .navbar-inverse {
     background-color: #31778f;
@@ -270,6 +291,7 @@ table.formula-history {
   font-size: 1.5em;
   font-family: 'Niconne', cursive;
   line-height: 1em;
+  
 }
 
 .formula-card {
@@ -289,9 +311,9 @@ table.formula-history {
 
 @media (max-width: 420px) { 
     
-body {
-    font-size: 16px;
-}
+  body {
+      font-size: 16px;
+  }
   
   .container-fluid {
     padding-left: 5px !important;
@@ -323,26 +345,23 @@ body {
     margin-right: -5px !important;
   }
   
-  .well {
-    padding: 10px;
-    margin-bottom: 15px;
-  }
- // PANELS  
-  .panel {
-    // border: none !important;
-    // font-size: 1.4em;
+ // PANELS  & WELLS
+  
+  .panel, .well {
+    padding: 5px !important;
+    margin-bottom: 15px !important;
   }
   
   .panel-heading {
-      padding: 10px 5px;
+      padding: 10px 5px !important;
   }
   
   .panel-body {
-    padding: 5px;
+    padding: 5px !important;
   }
   
   .panel-footer {
-    padding: 5px;
+    padding: 5px !important;
   }
   
   .table {

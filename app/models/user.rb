@@ -25,19 +25,19 @@ class User < ActiveRecord::Base
   end
   
   def connections
-    puts "checking your connected users:"
     SalonConnection.where("user_id OR salon_user_id = ?", self.id ).map { |connection|
-      connection.salon_user_id
+        connection.user_id == self.id ? connection.salon_user_id : connection.user_id
     }
   end
   
   def salon_connection(salon_user_id)
-      puts salon_user_id
-      
       combinations = ["user_id = #{self.id} AND salon_user_id = #{salon_user_id}",
       "user_id = #{salon_user_id} AND salon_user_id = #{self.id}"]
-      
       @connection = SalonConnection.where(combinations.join(' OR '))
+  end
+  
+  def is_self?(user)
+      self == user
   end
   
   def author?(formula)

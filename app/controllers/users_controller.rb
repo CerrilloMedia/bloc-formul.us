@@ -21,12 +21,13 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    unless @user == current_user
-      @connections = current_user.connections
+    @connections = current_user.connections
+      
+    if current_user.client?
+      @formulas = current_user.formulas.first(6)
     else
-      @connections = []
+      @formulas = @user.formulas.first(6)
     end
-    @formulas = @user.formulas.order('id DESC').first(6)
     @formula = @formulas.first || nil
     
   end
