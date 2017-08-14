@@ -36,17 +36,28 @@
      
      
      <div class="col-xs-12 col-sm-9" id="main-panel">
-                <div id="user-header" class="panel-heading">
+         <% if current_user.is_self?(@user) %>
+         <div class="visible-xs text-center">
+            <%= link_to user_formulas_path(@user), class: 'btn btn-sm btn-default', title: "User History" do %>
+                <i class="fa fa-book"></i> Complete History
+            <% end %>
+            </div>
+        <% end %>
+                <div id="user-header" class="panel-body">
+                    
+                    
+                    <div class="formula-guest-name">
+                        <% if current_user.is_self?(@user) %>
+                            <div class="">
+                                Your most recent formula
+                            </div>
+                        <% else %>
+                            formula for: 
+                            <strong><%= @user.email %></strong>
+                        <% end %>
+                    </div>
                     
                     <div id="formula-header" class="">
-                        <div class="formula-guest-name">
-                            <% if current_user.is_self?(@user) %>
-                                Your formulas
-                            <% else %>
-                                formula for: 
-                                <strong><%= @user.email %></strong>
-                            <% end %>
-                        </div>
                         <div class="formula-service-type">
                             <% if @formula %>
                                 <span class="hidden-xs">
