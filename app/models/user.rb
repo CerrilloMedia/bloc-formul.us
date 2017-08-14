@@ -2,10 +2,12 @@ class User < ActiveRecord::Base
 
     has_many :salon_connections
     has_many :salon_users, through: :salon_connections
-    has_many :formulas, foreign_key: :client_id
     
     has_many :inverse_salon_connections, class_name: "SalonConnection", foreign_key: "salon_user_id"
     has_many :inverse_salon_users, through: :inverse_salon_connections, source: :user
+    
+    has_many :guest_formulas, foreign_key: :artist_id, class_name: 'Formula'
+    has_many :formulas, foreign_key: :client_id
     
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

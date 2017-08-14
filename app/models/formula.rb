@@ -5,6 +5,8 @@ class Formula < ActiveRecord::Base
     validates :formulation,         presence: true, length: { minimum: 5}
     validates :salon_connection_id, presence: true
     
+    belongs_to :user
+    
     before_validation :set_salon_connection, on: :create
     before_validation :check_for_self
     

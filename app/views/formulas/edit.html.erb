@@ -3,7 +3,7 @@
       <i class="fa fa-edit"></i> edit formula for <%= @user.email %>
     </div>
   <div class="panel">
-    <div class="panel-body text-center">
+    <div class="panel-body text-center formula-form">
   
       <%= form_for @formula do |f| %>
           <%= f.number_field :artist_id, disabled: false, type: 'hidden' %>
@@ -11,6 +11,9 @@
           
           <div class="form-group row">
             <div class="col-sm-10 col-sm-offset-1 formula-card">
+             <div class="formula-card-header row">
+                 f
+             </div>
               <%= f.text_field :service_type, class: 'form-control xs-input', placeholder: 'service type' %>
               <hr>
               <%= f.text_area :formulation, class: 'form-control xs-input', rows:5, placeholder: 'formulation' %>

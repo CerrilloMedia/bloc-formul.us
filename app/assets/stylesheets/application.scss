@@ -107,6 +107,10 @@ a {
   padding: 5px;
 }
 
+.teal-background {
+  background: #56e39f !important;
+}
+
 #wrapper {
  padding-bottom: 60px;
 }
@@ -160,8 +164,8 @@ a {
       }
     }
   }
-  tr:hover {
-    // background: rgba(231, 209, 55, 0.5) !important;
+  tr:hover td {
+    background: #59C9A5 !important;
     cursor: pointer;
   }
 }
@@ -221,6 +225,9 @@ a {
     font-size:.8em;
 }
 
+.formula-form {
+  padding-top: 0 !important;
+}
 // NAVBAR UPDATES:
 .navbar-inverse {
     background-color: #31778f;
@@ -237,6 +244,7 @@ a {
     }
     a.navbar-brand {
       color: white;
+      text-shadow: 1px 1px 1px #56e39f;
     }
   .navbar-brand > img {
     height: 100%;

@@ -2,15 +2,38 @@ class FormulasController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    
     @user = User.find(params[:user_id])
-    @formulas = @user.formulas || []
+      
+   @formulas = case
+                when current_user.is_self?(@user)
+                  if @user.client?
+                    # guests can see their whole history
+                    @user.formulas.first(10)
+                  else
+                    # artists would see their complete client history
+                    @user.guest_formulas.first(10)
+                  end
+                when current_user.client? && @user.artist?
+                  # when a client visists an artists page, should only return their own client history with specific artist.
+                  @user.guest_formulas.where('client_id = ?', current_user.id)
+                when current_user.artist? && @user.client?
+                  # when artist visits any client page it shows clients entire general history
+                  @user.formulas
+                when current_user.artist? && @user.artist?
+                  @user.guest_formulas
+                end
+    
     @connections = current_user.connections
+    
   end
   
   def show
+    
     @formula = Formula.find(params[:id])
     @user = User.find(@formula.client_id)
     @artist = User.find(@formula.artist_id)
+    
   end
   
   def new
@@ -35,9 +58,12 @@ class FormulasController < ApplicationController
                   Formula.new(formula_params)
                 end
     
-    if params[:copy] && current_user.client?
-      @formula.client_id = current_user.id
+    if params[:copy]
+      @formula.client_id = current_user.id if current_user.client?
+      # if formula is being copied from another artist, assign new artist ID
+      @formula.artist_id = current_user.id if current_user.artist?
     end
+    
     
     if @formula.save 
       flash[:notice] = params[:copy] ? "Formula successfully copied" : "NEW Formula saved!"
@@ -52,6 +78,7 @@ class FormulasController < ApplicationController
   def edit
     @formula = Formula.find(params[:id])
     @user = User.find(@formula.client_id)
+    
     # only original artist can edit their formula
     unless current_user.id == @formula.artist_id
       flash[:alert] = "Only the original author can edit this formula"

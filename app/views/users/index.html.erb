@@ -12,9 +12,15 @@
                     <div class="">
                     <%= link_to user_path(user) do %>
                         <%= user.email %><br>
+                        
                         <% if user.formulas %>
-                            <span class="text-muted small"><small><%= user.formulas.size %> formulas accross <%= pluralize(user.inverse_salon_connections.size, 'artist') %></small></span>
+                            <% if user.artist? %>
+                                <span class="text-muted small"><small><%= user.connections.size %> formulas accross <%= pluralize(user.connections.size, 'guests') %></small></span>
+                            <% else %>
+                                <span class="text-muted small"><small><%= user.formulas.size %> formulas accross <%= pluralize(user.connections.size, 'artist') %></small></span>
+                            <% end %>
                         <% end %>
+                        
                     <% end %>
                     </div>
                 <% if current_user %>

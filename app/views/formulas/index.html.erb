@@ -3,9 +3,19 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h4>Complete formula history for <%= @user.email %></h4>
+    <h4>Complete formula history
+    <% if @user.artist? && !current_user.is_self?(@user)%>
+      with 
+    <% else %>
+      for
+    <% end %>
+    
+      <%= link_to user_path(@user), class: '' do %>
+        <strong><%= @user.email %></strong>
+      <% end %>
+    </h4>
     <div class="">
-      <small><i><%= pluralize(@formulas.size, "total formulas") %></i></small>
+        <small><i><%= pluralize(@formulas.size, "total formulas") %></i></small>
     </div>
   </div>
 </div>
