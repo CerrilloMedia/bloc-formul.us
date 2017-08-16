@@ -11,16 +11,16 @@
     <% end %>
     
       <%= link_to user_path(@user), class: '' do %>
-        <strong><%= @user.email %></strong>
+        <strong><%= @user.full_name %></strong>
       <% end %>
     </h4>
     <div class="">
-        <small><i><%= pluralize(@formulas.size, "total formulas") %></i></small>
+        <small><i><%= pluralize(@formulas.size, "total formula") %></i></small>
     </div>
   </div>
 </div>
                     <!-- User Links -->
-                    <%= render partial: 'users/user_links', locals: {connections: @connections, user: @user, formula: @formula } %>
+                    <%= render partial: 'users/user_links', locals: {connections: @connections, user: @user, formula: @formula, history: nil } %>
                       
   <table class="table formula-history">
     <tr>
@@ -48,8 +48,10 @@
       <td>
       <div class="user-links">
         <% if @connections.include?(@user.id) %>
-          <%= link_to edit_formula_path(formula.id), class:"btn btn-sm btn-default ml-1 col-xs-12", title:"edit formula" do %>
-            <%= icon('pencil-square-o') %><span class="hidden-xs"> edit</span>
+          <% if current_user.author?(formula) %>
+            <%= link_to edit_formula_path(formula.id), class:"btn btn-sm btn-default ml-1 col-xs-12", title:"edit formula" do %>
+              <%= icon('pencil-square-o') %><span class="hidden-xs"> edit</span>
+            <% end %>
           <% end %>
           <%= link_to formulas_path(copy: formula.id), method: :post, class: 'btn btn-sm btn-default ml-1 col-xs-12' do %>
             <%= icon('copy') %><span class="hidden-xs">copy</span>
@@ -65,7 +67,7 @@
     <tr>
       <td colspan="2">
         <div class="text-center panel-body">
-          NO FORMULAS for <%= @user.email %>
+          NO FORMULAS for <%= @user.full_name %>
         </div>
       </td>
     </tr>

@@ -4,36 +4,38 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <div class="panel">
-  <div class="input-group panel-body">
-    <%= f.label :email, class: "input-group-addon hidden-xs" %>
-    <%= f.label :email, class: "col-xs-12 visible-xs" %>
     
-    <%= f.email_field :email, class: 'form-control', autofocus: true %>
+  <div class="text-center teal-background">
+    <div class="panel-body col-sm-6">
+      <%= f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: 'first name' %>
+    </div>
+    <div class="panel-body col-sm-6">
+      <%= f.text_field :last_name, class: 'form-control', autofocus: true, placeholder: 'last name' %>
+    </div>
+    
+    <div class="panel-body">
+      <%= f.email_field :email, class: 'form-control', autofocus: true, placeholder: 'e-mail (required)' %>
+    </div>
   </div>
-
-  <div class="input-group panel-body">
-    
-    <%= f.label :password, class: "input-group-addon hidden-xs" %>
-    <%= f.label :password, class: "col-xs-12 visible-xs" %>
-    
-   <% if @minimum_password_length %>
-    <%= f.password_field :password, class: 'form-control', autocomplete: "off", placeholder: "#{@minimum_password_length} character minimum" %>
-    <% else %>
-    <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
-    <% end %>
-    
+  <div class="text-center teal-background">
+    <div class="panel-body">
+      <%= f.label :password, class: "col-xs-12" %>
+      
+     <% if @minimum_password_length %>
+      <%= f.password_field :password, class: 'form-control', autocomplete: "off", placeholder: "#{@minimum_password_length} character minimum" %>
+      <% else %>
+      <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+      <% end %>
+      
+    </div>
+    <div class="panel-body">
+      <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off", placeholder: 'password confirmation' %>
+    </div>
   </div>
-
-  <div class="input-group panel-body">
-    <%= f.label :password_confirmation, class: "input-group-addon hidden-xs" %>
-    <%= f.label :password_confirmation, class: "col-xs-12 visible-xs" %>
     
-    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
-  </div>
-
-  <div class="panel-body">
-    <%= f.submit "Sign up", class: 'btn btn-default' %>
-  </div>
+    <div class="panel-body">
+      <%= f.submit "Sign up", class: 'btn btn-default' %>
+    </div>
   </div>
   
 <% end %>

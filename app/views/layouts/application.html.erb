@@ -53,7 +53,7 @@
                   <% end %>
                 </li>
                 <li class="nav-item text-right">
-                  <%= link_to "Logged in as: #{current_user.email}", user_path(current_user), class: 'nav-link' %>
+                  <%= link_to "Logged in as: #{current_user.full_name}", user_path(current_user), class: 'nav-link', title: "#{current_user.email}" %>
                 </li>
             <% else %>
                 <li class="nav-item float-sm-right"><%= link_to "Login", new_user_session_path, class: 'nav-link' %></li>
@@ -102,6 +102,7 @@
             Sign-in <span class="glyphicon glyphicon-log-in text-default"></span>
           <% end %>
         <% else %>
+          <%= link_to "edit account", edit_user_registration_path %>
           <%= link_to destroy_user_session_path, method: :delete, class: 'col-sm-4 pull-right text-right', title: 'Log-out' do %>
             Sign-out <span class="glyphicon glyphicon-log-out text-default"></span>
           <% end %>

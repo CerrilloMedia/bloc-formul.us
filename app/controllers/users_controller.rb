@@ -2,31 +2,32 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   
   def index
-        @users = if current_user
-                    
-                    if current_user.artist?
+        @users = if current_user.artist?
                         User.client
                     elsif current_user.admin?
                         User.all
                     else
                         User.artist
                     end
-                 else
-                    #public view of artists
-                    User.artist
-                 end
                  
         @connections = current_user.connections
   end
   
   def show
     @user = User.find(params[:id])
+    
+    unless current_user.artist? && @user.client? || current_user.connections.include?(@user.id) || current_user.is_self?(@user)
+      flash[:alert] = "You do can not access this profile. Consider connecting with them first"
+      
+      redirect_to request.referrer || root_path
+    end
+    
     @connections = current_user.connections
     
     @formulas = case
                 when current_user.is_self?(@user)
                   if @user.client?
-                    # guests can see their whole history
+                    # guests can see their entire history
                     @user.formulas.first(10)
                   else
                     # artists would see their complete client history
@@ -37,9 +38,12 @@ class UsersController < ApplicationController
                   @user.guest_formulas.where('client_id = ?', current_user.id)
                 when current_user.artist? && @user.client?
                   # when artist visits any client page it shows clients entire general history
-                  @user.formulas
+                  @user.formulas.first(10)
                 when current_user.artist? && @user.artist?
-                  @user.guest_formulas
+                  # when user as artist visits another artists page, it shows the users guest formulas
+                  @user.guest_formulas.first(10)
+                when current_user.client? && @user.client?
+                  []
                 end
                 
     @formula = @formulas.first

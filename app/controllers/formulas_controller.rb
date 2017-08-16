@@ -38,6 +38,11 @@ class FormulasController < ApplicationController
   
   def new
     
+    unless current_user.artist?
+      flash[:alert] = "You do not have access to creating a formula"
+      redirect_to request.referrer
+    end
+    
     @formula = Formula.new
     
     @user = User.find(params[:requested_user])
@@ -65,7 +70,7 @@ class FormulasController < ApplicationController
     end
     
     
-    if @formula.save 
+    if @formula.save
       flash[:notice] = params[:copy] ? "Formula successfully copied" : "NEW Formula saved!"
       redirect_to current_user.artist? ? @formula : current_user
     else

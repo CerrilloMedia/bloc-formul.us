@@ -2,18 +2,18 @@
   <% if current_user.is_self?(@user) %>
   <div class="btn-group">
     <div class="btn btn-success">Formula for</div>
-    <%= link_to @user, class: 'btn btn-default' do %><%= @user.email %><% end %>
+    <%= link_to @user, class: 'btn btn-default' do %><%= @user.full_name %><% end %>
   </div>
   <% else %>
     <%= link_to users_path, class: 'btn btn-default hidden-xs' do %>
       Guests
     <% end %>
-  <div class="btn-group">
-    <span class="btn btn-success inactive">Formula for </span>
-    <%= link_to user_path(@user), class: 'btn btn-default' do %>
-      <%= @user.email %>
-    <% end %>
-  </div>
+    <div class="btn-group">
+      <span class="btn btn-success inactive">Formula for </span>
+      <%= link_to user_path(@user), class: 'btn btn-default' do %>
+        <%= @user.full_name %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="">
-    <small class="text-muted col-sm-8 col-xs-12 row">submitted by <%= @artist.email %> on <%= format_datetime(@formula.updated_at, 'mdy') %></small>
+    <small class="text-muted col-sm-8 col-xs-12 row">submitted by <%= link_to @artist.full_name, user_path(@artist) %> on <%= format_datetime(@formula.updated_at, 'mdy') %></small>
   </div>
   <% if current_user.connections.include?(@user.id) && current_user === @artist %>
     <div class="user-links pull-right panel">

@@ -3,6 +3,9 @@
         Edit profile info for: <%= @user.email %>
     </div>
     
+    <%= link_to "edit", edit_user_registration_path %>
+    <%= link_to "edit password", edit_user_password_path(@user) %>
+    
     <div class="panel panel-default">
     <div class="panel-body">
         Dashboard information for other statistics

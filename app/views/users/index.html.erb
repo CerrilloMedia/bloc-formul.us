@@ -11,7 +11,11 @@
         <div class="panel-body formula-card">
                     <div class="">
                     <%= link_to user_path(user) do %>
-                        <%= user.email %><br>
+                        <% if user.first_name && user.last_name %>
+                            <%= user.full_name %><br>
+                        <% else %>
+                            <small><%= user.email %></small><br>
+                        <% end %>
                         
                         <% if user.formulas %>
                             <% if user.artist? %>
@@ -25,10 +29,12 @@
                     </div>
                 <% if current_user %>
                     <div class="user-links text-right">
-                            <% if @connections.include?(user.id) %>
+                            <% if current_user.artist? %>
                                     <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default' do %>
                                         <%= icon('pencil-square-o') %> New Formula
                                     <% end %>
+                            <% end %>
+                            <% if @connections.include?(user.id) %>
                                     <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete" do %>
                                         <i class="fa fa-user-times"></i>
                                     <% end %>

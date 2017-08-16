@@ -8,7 +8,16 @@ class Formula < ActiveRecord::Base
     belongs_to :user
     
     before_validation :set_salon_connection, on: :create
+    before_validation :set_names, on: :create
+    before_validation :set_names, on: :create
+    
     before_validation :check_for_self
+    
+    def author_name
+        raise 'boom'
+        self.artist.full_name
+        User.find(Formula.find(self.id).artist_id).full_name
+    end
     
     private
     
@@ -21,8 +30,14 @@ class Formula < ActiveRecord::Base
     default_scope { order('id DESC') }
     
     def set_salon_connection
-        artist = User.find(artist_id)
         self.salon_connection_id = current_match.first.id || nil
+    end
+    
+    def set_names
+        if self.author_name.nil? || self.client_name.nil?
+           self.author_name = User.find(artist_id).full_name
+           self.client_name = User.find(client_id).full_name
+       end
     end
     
     def current_match

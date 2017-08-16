@@ -1,4 +1,5 @@
  <div class="col-xs-12 col-lg-10 col-lg-offset-1 dashboard">
+   
      <div id="sidebar" class="col-sm-3 hidden-xs">
         
             <div id="history-list" class="panel-body row">
@@ -19,15 +20,21 @@
                             <td class="text-left">
                                 <%= link_to formula_path(formula), class: '' do %>
                                         <%= formula.service_type %>
-                                    <% if current_user.artist? && @user == current_user %>
+                                        
+                                    <% if current_user.artist? %>
                                         <br>
-                                        <span class="text-muted">user #<%= formula.client_id %> </span>
+                                        <span class="text-muted">user #<%= formula.client_name %> </span>
+                                    <% else %>
+                                        <br>
+                                        <span class="text-muted">artist: <%= formula.author_name %> </span>
                                     <% end %>
+                                    
                                 <% end %>
                             </td>
                             <td class="t-date text-right"><%= format_datetime(formula.created_at, 'md') %></td>
                         </tr>
-                    <% end %>
+                     <% end %>
+                     
                     </table>
                 <% end %>
             </div>
@@ -41,7 +48,7 @@
             <%= link_to user_formulas_path(@user), class: 'btn btn-sm btn-default', title: "User History" do %>
                 <i class="fa fa-book"></i> Complete History
             <% end %>
-            </div>
+        </div>
         <% end %>
                 <div id="user-header" class="panel-body">
                     
@@ -51,9 +58,11 @@
                             <div class="">
                                 Your most recent formula
                             </div>
+                        <% elsif @user.artist? && current_user.client? %>
+                            Your most recent formula with: 
+                            <strong><%= @user.full_name %></strong>
                         <% else %>
-                            formula for: 
-                            <strong><%= @user.email %></strong>
+                            
                         <% end %>
                     </div>
                     
@@ -70,7 +79,7 @@
                     </div>
                     
                     <!--User links-->
-                    <%= render partial: 'user_links', locals: {connections: @connections, user: @user, formula: @formula } %>
+                    <%= render partial: 'user_links', locals: {connections: @connections, user: @user, formula: @formula, history: true } %>
                     
                  </div>
          <% if @formula %>
@@ -85,7 +94,7 @@
                  <div id="formula-formulation">
                      <%= @formula.formulation %>
                  </div>
-                    <span class="formula-card-date pull-right">created on <%= format_datetime(@formula.created_at,'md') %></span> 
+                    <span class="formula-card-date pull-right">created on <%= format_datetime(@formula.created_at,'md') %> by <%= @formula.author_name %></span> 
              </div>
              <div id="formula-client-note" class="formula-note col-xs-12 well hidden">
                  <div class="note-header">

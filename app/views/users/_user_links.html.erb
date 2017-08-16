@@ -3,13 +3,15 @@
       <div class="panel user-links row">
         <% if formula %>
           <!--copy-->
-          <%= link_to formulas_path(copy: formula.id), method: :create, class: 'btn btn-sm btn-default' do %>
-            <%= icon('copy') %> <span class="hidden-xs">copy <span class="hidden-sm">latest</span> formula</span>
-          <% end %>
-          <!--edit-->
-          <% if current_user.author?(formula) %>
-            <%= link_to edit_formula_path(formula),class: 'btn btn-sm btn-default'  do %>
-              edit <span class="hidden-xs">formula</span>
+          <% if current_user.artist? %>
+            <%= link_to formulas_path(copy: formula.id), method: :create, class: 'btn btn-sm btn-default' do %>
+              <%= icon('copy') %> <span class="hidden-xs">copy <span class="hidden-sm">latest</span> formula</span>
+            <% end %>
+            <!--edit-->
+            <% if current_user.author?(formula) %>
+              <%= link_to edit_formula_path(formula),class: 'btn btn-sm btn-default'  do %>
+                edit <span class="hidden-xs">formula</span>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
@@ -20,8 +22,10 @@
         
         <div class='btn-group pull-right'>
           
-          <%= link_to user_formulas_path(@user), class: 'btn btn-sm btn-default', title: "User History" do %>
-            <i class="fa fa-book"></i> <span class="hidden-sm hidden-xs">User</span> History
+          <% if history %>
+            <%= link_to user_formulas_path(@user), class: 'btn btn-sm btn-default', title: "User History" do %>
+              <i class="fa fa-book"></i> <span class="hidden-sm hidden-xs">User</span> History
+            <% end %>
           <% end %>
           
           <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success', method: :delete, title: "Remove Connection" do %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806090724) do
+ActiveRecord::Schema.define(version: 20170816195044) do
 
   create_table "formulas", force: :cascade do |t|
     t.integer  "artist_id"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20170806090724) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "service_type"
+    t.string   "author_name"
+    t.string   "client_name"
   end
 
   create_table "salon_connections", force: :cascade do |t|
