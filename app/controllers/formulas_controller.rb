@@ -24,7 +24,7 @@ class FormulasController < ApplicationController
                   @user.guest_formulas
                 end
     
-    @connections = current_user.connections
+    @connection_ids = current_user.connection_ids
     
   end
   
@@ -38,9 +38,12 @@ class FormulasController < ApplicationController
   
   def new
     
-    unless current_user.artist?
-      flash[:alert] = "You do not have access to creating a formula"
-      redirect_to request.referrer
+    if current_user.client?
+      flash[:alert] = "You do not have access to creating a formula."
+      redirect_to request.referrer || root_path
+    elsif current_user.connection_ids.include?(params[:requested_user])
+      flash[:alert] = "You must be connected with client before creating a formula."
+      redirect_to request.referrer || user_path(params[:requested_user])
     end
     
     @formula = Formula.new

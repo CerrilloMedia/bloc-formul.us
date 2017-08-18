@@ -35,19 +35,30 @@ class User < ActiveRecord::Base
     Formula.where('client_id = ?', user_id)
   end
   
-  def connections
+  def connection_ids
     # return User.id's connected to self in array
-    SalonConnection.where("user_id OR salon_user_id = ?", self.id ).map { |connection|
-        connection.user_id == self.id ? connection.salon_user_id : connection.user_id
+    puts "finding connections for ##{self.id}:"
+    ids = []
+    SalonConnection.where("user_id = ? OR salon_user_id = ?", self.id, self.id ).map { |connection|
+       ids << if connection.user_id == self.id
+                           connection.salon_user_id
+                         else
+                           connection.user_id
+                         end
     }
+    ids
   end
   
-  def salon_connection(salon_user_id)
-      # return self(user) connection objects
-      combinations = ["user_id = #{self.id} AND salon_user_id = #{salon_user_id}",
-      "user_id = #{salon_user_id} AND salon_user_id = #{self.id}"]
-      @connection = SalonConnection.where(combinations.join(' OR '))
-  end
+  # def salon_connection(salon_user_id)
+  #     # return self(user) connection objects
+  #     combinations = ["user_id = #{self.id} AND salon_user_id = #{salon_user_id}",
+  #     "user_id = #{salon_user_id} AND salon_user_id = #{self.id}"]
+  #     @connection = SalonConnection.where(combinations.join(' OR '))
+  #     SalonConnection.where("user_id = ? OR salon_user_id = ?", self.id, self.id ).select { | connection |
+  #       connection.salon_user_id == salon_user_id
+  #     }
+      
+  # end
   
   def is_self?(user)
       self == user

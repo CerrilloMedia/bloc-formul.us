@@ -47,7 +47,7 @@
     <% if current_user %>
       <td>
       <div class="user-links">
-        <% if @connections.include?(@user.id) %>
+        <% if @connection_ids.include?(@user.id) %>
           <% if current_user.author?(formula) %>
             <%= link_to edit_formula_path(formula.id), class:"btn btn-sm btn-default ml-1 col-xs-12", title:"edit formula" do %>
               <%= icon('pencil-square-o') %><span class="hidden-xs"> edit</span>

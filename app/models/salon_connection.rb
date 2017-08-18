@@ -23,11 +23,5 @@ class SalonConnection < ActiveRecord::Base
             self.errors.add(:salon_connection, 'Already friends!')
         end
   end
-  
-#   def self.salon_connection(current_user_id, user_id)
-#     combinations = ["user_id = #{current_user_id} AND salon_user_id = #{user_id}",
-#     "user_id = #{user_id} AND salon_user_id = #{current_user_id}"]
-#     @salon_connection = SalonConnection.where(combinations.join(' OR '))
-#   end
         
 end

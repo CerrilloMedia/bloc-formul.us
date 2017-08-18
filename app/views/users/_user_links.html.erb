@@ -1,9 +1,10 @@
-<% if !current_user.is_self?(@user) %>
-    <% if connections.include?(user.id) %>
-      <div class="panel user-links row">
+<div class="">
+  
+  <% if current_user.connection_ids.include?(user.id) %>
+  
+    <% if current_user.artist? %>
         <% if formula %>
-          <!--copy-->
-          <% if current_user.artist? %>
+            <!--copy-->
             <%= link_to formulas_path(copy: formula.id), method: :create, class: 'btn btn-sm btn-default' do %>
               <%= icon('copy') %> <span class="hidden-xs">copy <span class="hidden-sm">latest</span> formula</span>
             <% end %>
@@ -13,31 +14,51 @@
                 edit <span class="hidden-xs">formula</span>
               <% end %>
             <% end %>
+            
+          <!--new-->
+          <%= link_to new_formula_path(requested_user: user), class: 'btn btn-sm btn-default' do %>
+            <%= icon('pencil-square-o') %> <span class="hidden-xs">create <span class="hidden-sm">new </span>formula</span>
           <% end %>
-        <% end %>
-        <!--new-->
-        <%= link_to new_formula_path(requested_user: user), class: 'btn btn-sm btn-default' do %>
-          <%= icon('pencil-square-o') %> <span class="hidden-xs">create <span class="hidden-sm">new </span>formula</span>
+          
         <% end %>
         
-        <div class='btn-group pull-right'>
-          
-          <% if history %>
-            <%= link_to user_formulas_path(@user), class: 'btn btn-sm btn-default', title: "User History" do %>
-              <i class="fa fa-book"></i> <span class="hidden-sm hidden-xs">User</span> History
-            <% end %>
-          <% end %>
-          
-          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success', method: :delete, title: "Remove Connection" do %>
-            <i class="fa fa-user-times"></i>
-          <% end %>
-        </div>
-      </div>
-    <% else %>
-      <div class='user-links btn-group'>
-        <%= link_to salon_connections_path(salon_user_id: user.id), class: 'btn btn-sm btn-success', method: :post, title: "Create Connection" do %>
-          <i class="fa fa-user-plus"></i> Connect to create a formula
-        <% end %>
-      </div>
     <% end %>
-<% end %>
+    
+      <div class='btn-group pull-right'>
+        
+        <% if history %>
+          <%= link_to user_formulas_path(user), class: 'btn btn-sm btn-default', title: "User History" do %>
+            <i class="fa fa-book"></i> <span class="hidden-sm hidden-xs">User</span> History
+          <% end %>
+        <% end %>
+      
+        
+        <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success', method: :delete, title: "Remove Connection" do %>
+          <i class="fa fa-user-times"></i>
+        <% end %>
+  
+      </div>
+    
+  <% else %>
+  
+    <div class='btn-group pull-right'>
+          
+      <% if history %>
+        <%= link_to user_formulas_path(user), class: 'btn btn-sm btn-default', title: "User History" do %>
+          <i class="fa fa-book"></i> <span class="hidden-sm hidden-xs">User</span> History
+        <% end %>
+      <% end %>
+      
+      <% unless current_user.is_self?(user) %>
+        <%= link_to salon_connections_path(salon_user_id: user.id), class: 'btn btn-sm btn-success', method: :post, title: "Create Connection" do %>
+          <i class="fa fa-user-plus"></i>
+        <% end %>
+      <% end %>
+      
+  
+    </div>
+  
+  <% end %>
+  
+  
+</div>

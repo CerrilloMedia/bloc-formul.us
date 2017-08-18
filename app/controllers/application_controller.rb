@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   
+  def local_request?(ref)
+      
+    regex = /https?:\/\/[a-zA-Z\d-]*.[a-zA-Z\d-]*.[a-zA-Z]+/
+    regex.match(ref).to_s == request.env['HTTP_ORIGIN'].to_s
+      
+  end
   
   private
   

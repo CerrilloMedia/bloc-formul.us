@@ -2,27 +2,26 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   
   def index
-        @users = if current_user.artist?
-                        User.client
-                    elsif current_user.admin?
-                        User.all
-                    else
-                        User.artist
-                    end
+    @users =  if current_user.artist?
+                    User.client
+              elsif current_user.admin?
+                  User.all
+              else
+                  User.artist
+              end
                  
-        @connections = current_user.connections
+        @connection_ids = current_user.connection_ids
   end
   
   def show
     @user = User.find(params[:id])
     
-    unless current_user.artist? && @user.client? || current_user.connections.include?(@user.id) || current_user.is_self?(@user)
+    unless current_user.artist? && @user.client? || current_user.connection_ids.include?(@user.id) || current_user.is_self?(@user)
       flash[:alert] = "You do can not access this profile. Consider connecting with them first"
-      
       redirect_to request.referrer || root_path
     end
     
-    @connections = current_user.connections
+    @connection_ids = current_user.connection_ids
     
     @formulas = case
                 when current_user.is_self?(@user)

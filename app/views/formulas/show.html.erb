@@ -29,7 +29,7 @@
   <div class="">
     <small class="text-muted col-sm-8 col-xs-12 row">submitted by <%= link_to @artist.full_name, user_path(@artist) %> on <%= format_datetime(@formula.updated_at, 'mdy') %></small>
   </div>
-  <% if current_user.connections.include?(@user.id) && current_user === @artist %>
+  <% if current_user.connection_ids.include?(@user.id) && current_user.artist? %>
     <div class="user-links pull-right panel">
       <%= link_to formulas_path(copy: @formula.id), method: :post, class: 'btn btn-sm btn-default' do %>
         <%= icon('copy') %> COPY
