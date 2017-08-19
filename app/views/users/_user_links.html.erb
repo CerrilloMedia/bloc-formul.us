@@ -43,7 +43,7 @@
   
     <div class='btn-group pull-right'>
           
-      <% if history %>
+      <% if history && !current_user.is_self?(user)%>
         <%= link_to user_formulas_path(user), class: 'btn btn-sm btn-default', title: "User History" do %>
           <i class="fa fa-book"></i> <span class="hidden-sm hidden-xs">User</span> History
         <% end %>

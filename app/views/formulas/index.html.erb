@@ -4,16 +4,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4>Complete formula history
-    <% if @user.artist? && !current_user.is_self?(@user)%>
-      with 
-    <% else %>
-      for
-    <% end %>
+    <% if @user.artist? && !current_user.is_self?(@user)%>with<% else %>for<% end %>
     
       <%= link_to user_path(@user), class: '' do %>
-        <strong><%= @user.full_name %></strong>
+        <strong class=""><%= @user.full_name %></strong>
       <% end %>
     </h4>
+    <br>
     <div class="">
         <small><i><%= pluralize(@formulas.size, "total formula") %></i></small>
     </div>
@@ -41,7 +38,10 @@
       <td class="col-xs-10 h4">
         <%= link_to formula_path(formula), class: '' do %>
           <%= formula.service_type %><br>
-          <strong><span class="hidden-xs"><%= formula.formulation %></span></strong>
+          <strong><span class="hidden-xs"><%= formula.formulation %><br></span></strong>
+        <% end %>
+        <% if @user.client? %>
+          <small><i>by <%= formula.author_name %></i></small>
         <% end %>
       </td>
     <% if current_user %>

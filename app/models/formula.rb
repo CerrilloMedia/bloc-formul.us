@@ -47,8 +47,7 @@ class Formula < ActiveRecord::Base
         if self.author_name.nil? || self.client_name.nil?
            self.author_name = User.find(artist_id).full_name
            self.client_name = User.find(client_id).full_name
-       end
+        end
     end
-    
     
 end

@@ -2,7 +2,7 @@ class SalonConnectionsController < ApplicationController
 
   def create
       
-      @salon_connection = if current_user.artist?
+      @salon_connection = if current_user.artist? || current_user.admin?
                             current_user.salon_connections.build(salon_user_id: params[:salon_user_id])
                         else
                             current_user.inverse_salon_connections.build(user_id: params[:salon_user_id])
@@ -22,7 +22,7 @@ class SalonConnectionsController < ApplicationController
 
   def destroy
       
-      @salon_connection =   if current_user.artist?
+      @salon_connection =   if current_user.artist? || current_user.admin?
                                 current_user.salon_connections.find_by(salon_user_id: params[:id])
                             else
                                 current_user.inverse_salon_connections.find_by(user_id: params[:id])

@@ -45,7 +45,7 @@ class UsersController < ApplicationController
                   []
                 end
                 
-    @formula = @formulas.first
+    @formula = @formulas ? @formulas.first : []
     
   end
   

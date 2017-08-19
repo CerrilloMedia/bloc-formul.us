@@ -49,17 +49,6 @@ class User < ActiveRecord::Base
     ids
   end
   
-  # def salon_connection(salon_user_id)
-  #     # return self(user) connection objects
-  #     combinations = ["user_id = #{self.id} AND salon_user_id = #{salon_user_id}",
-  #     "user_id = #{salon_user_id} AND salon_user_id = #{self.id}"]
-  #     @connection = SalonConnection.where(combinations.join(' OR '))
-  #     SalonConnection.where("user_id = ? OR salon_user_id = ?", self.id, self.id ).select { | connection |
-  #       connection.salon_user_id == salon_user_id
-  #     }
-      
-  # end
-  
   def is_self?(user)
       self == user
   end

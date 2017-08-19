@@ -10,9 +10,11 @@ class SalonConnection < ActiveRecord::Base
   private
   
   def check_for_self
-     if user.id == salon_user.id
-         self.errors.add(:user, "Cannot connect to yourself.")
-     end
+    if user.artist? && salon_user.client?
+        if user.id == salon_user.id
+            self.errors.add(:user, "Cannot connect to yourself.")
+        end
+    end
   end
   
   def check_for_connection

@@ -310,14 +310,46 @@ table.formula-history {
   }
 }
 
+#error_explanation {
+  border: 1px solid #56e39f;
+    padding: 0px;
+    margin: 10px;
+  
+  h2 {
+    background: #56e39f;
+    margin-top: 0;
+    padding: 2px;
+  }
+  ul {
+    -webkit-padding-start: 0px;
+    li {
+      list-style: none;
+    }
+  }
+  
+}
+
 @media (min-width: 768px) {
   .navbar {
       border-radius: 0 !important;
   }
 }
 
+@media (max-width: $screen-xs-max) {
+    .pull-xs-left {
+        float: left;
+    }
+    .pull-xs-right {
+        float: right;
+    }
+}
 
 @media (max-width: 420px) { 
+
+  
+  #error_explanation {
+        margin: 7px;
+  }
     
   body {
       font-size: 16px;

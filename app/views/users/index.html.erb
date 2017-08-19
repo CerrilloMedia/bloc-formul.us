@@ -2,8 +2,10 @@
     <div class="">
         <% if current_user.client? %>
             Artist
-        <% else %>
+        <% elsif current_user.artist? %>
             Client 
+        <% else %>
+            All Users
         <% end %>
         listing
     </div>
