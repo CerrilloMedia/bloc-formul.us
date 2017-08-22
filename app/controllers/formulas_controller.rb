@@ -1,6 +1,7 @@
 class FormulasController < ApplicationController
   before_action :authenticate_user!
   
+  
   def index
     
     @user = User.find(params[:user_id])
@@ -33,6 +34,11 @@ class FormulasController < ApplicationController
     @formula = Formula.find(params[:id])
     @user = User.find(@formula.client_id)
     @artist = User.find(@formula.artist_id)
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @formula }
+    end
     
   end
   

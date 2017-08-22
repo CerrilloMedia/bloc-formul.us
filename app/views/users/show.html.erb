@@ -20,7 +20,7 @@
                      <% @formulas.each do |formula| %>
                         <tr>
                             <td class="text-left">
-                                <%= link_to formula_path(formula), class: '' do %>
+                                <%= link_to formula_path(formula), data: { formula: "#{formula.id}" }, class: '' do %>
                                         <%= formula.service_type %>
                                         
                                     <% if current_user.artist? %>
@@ -94,14 +94,18 @@
                  f
              </div>
              <div class="panel panel-body formula-card">
-                 <div id="formula-service-type" class="visible-xs">
-                     <%= @formula.service_type %>
+                 <div id="" class="formula-service-type visible-xs">
+                     <span>
+                         <%= @formula.service_type %>
+                     </span>
                  </div>
                      <hr class="visible-xs">
                  <div id="formula-formulation">
                      <%= @formula.formulation %>
                  </div>
-                    <span class="formula-card-date pull-right">created on <%= format_datetime(@formula.created_at,'md') %> by <%= @formula.author_name %></span> 
+                 <div class='formula-card-footer pull-right'>
+                    created on  <span class="formula-card-date"><%= format_datetime(@formula.created_at,'md') %></span> by <span class='formula-card-author'><%= @formula.author_name %></span> 
+                 </div>
              </div>
              <div id="formula-client-note" class="formula-note col-xs-12 well hidden">
                  <div class="note-header">
