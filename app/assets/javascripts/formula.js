@@ -1,8 +1,9 @@
 $(document).on('turbolinks:load', function () {
   $("a[data-formula]").click(function(e) {
     e.preventDefault();
-    var id = $(this).data('formula');
     
+    var id = $(this).data('formula');
+    console.log(id);
     $.getJSON('/formulas/' + id + '.json', function(data) {
       
       $('.formula-service-type span').html(data.service_type);

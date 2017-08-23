@@ -2,11 +2,10 @@ class User < ActiveRecord::Base
 
     has_many :salon_connections
     has_many :salon_users, through: :salon_connections
-    
     has_many :inverse_salon_connections, class_name: "SalonConnection", foreign_key: "salon_user_id"
     has_many :inverse_salon_users, through: :inverse_salon_connections, source: :user
     
-    # artists.guest_formuas
+    # artists.guest_formulas
     has_many :guest_formulas, foreign_key: :artist_id, class_name: 'Formula'
     
     # client.formulas
@@ -45,7 +44,8 @@ class User < ActiveRecord::Base
                          else
                            connection.user_id
                          end
-    }
+    };
+    
     ids
   end
   

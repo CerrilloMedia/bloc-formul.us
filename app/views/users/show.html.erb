@@ -47,7 +47,6 @@
             
      </div>
      
-     
      <div class="col-xs-12 col-sm-9" id="main-panel">
        
          <% if current_user.is_self?(@user) %>
@@ -86,7 +85,7 @@
             </div>
             
             <!--User links-->
-            <%= render partial: 'user_links', locals: {connections: @connection_ids, user: @user, formula: @formula, history: true } %>
+            <%= render partial: 'user_links', locals: { user: @user, formula: @formula, history: true } %>
             
          </div>
          <% if @formula %>
