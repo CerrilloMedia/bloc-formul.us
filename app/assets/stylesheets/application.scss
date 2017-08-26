@@ -18,6 +18,8 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+
+
 * {
   font-family: 'Muli', sans-serif;
 }
@@ -48,6 +50,14 @@ a {
   text-decoration: none !important;
 }
 
+.green-background {
+  background: #56E39F;
+  color: white;
+}
+
+.teal-background {
+  background: #56e39f !important;
+}
 // PANELS & WELLS
 .panel, .well {
   border-radius: 0 !important;
@@ -102,13 +112,18 @@ a {
 .btn-danger:active:hover, .btn-danger:active:focus {
   background-color: #245769;
 }
+
+.btn-no-radius {
+  border-radius: 0px !important;
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
 .alert {
   margin-top: -20px;
   padding: 5px;
-}
-
-.teal-background {
-  background: #56e39f !important;
 }
 
 #wrapper {
@@ -155,7 +170,7 @@ a {
 .services-list > tbody {
   tr {
     th, td {
-    padding: 0px;
+    padding: 0px 5px;
     font-size: .8em;
     line-height: 2em;
       a {
@@ -163,12 +178,17 @@ a {
         color: black;
       }
     }
+    .td-no-border-top, .td-no-border-top:hover {
+      border-top: none !important;
+      background: none !important;
+    }
   }
   tr:hover td {
-    background: #59C9A5 !important;
+    background: #56e39f !important;
     cursor: pointer;
   }
 }
+
 
 
 // MAIN PANEL
@@ -248,7 +268,7 @@ a {
     }
   .navbar-brand > img {
     height: 100%;
-  } 
+  }
 }
 
 
@@ -257,13 +277,13 @@ a {
   // sticky footer
     position: absolute;
     bottom: 0;
-    
+
     width: 100%;
     height: 60px;
     line-height: 60px;
     background-color: rgb(34,34,34);
     margin-top: 1em;
-    
+
     color: #9d9d9d !important;
       a {
         color: #9d9d9d;
@@ -276,7 +296,7 @@ a {
 
 // USERS#SHOW
 .services-list {
-    -webkit-padding-start: 0px;   
+    -webkit-padding-start: 0px;
     li {
         list-style: none;
     }
@@ -299,22 +319,28 @@ table.formula-history {
   font-size: 1.5em;
   font-family: 'Niconne', cursive;
   line-height: 1em;
-  
+
 }
 
 .formula-card {
   border: 1px solid #56E39F;
+  padding-bottom: .5em;
   .xs-input {
     border: none;
     box-shadow: none;
   }
 }
 
+.formulation-input {
+  resize: vertical !important;
+}
+
+
 #error_explanation {
   border: 1px solid #56e39f;
     padding: 0px;
     margin: 10px;
-  
+
   h2 {
     background: #56e39f;
     margin-top: 0;
@@ -326,7 +352,7 @@ table.formula-history {
       list-style: none;
     }
   }
-  
+
 }
 
 @media (min-width: 768px) {
@@ -344,22 +370,22 @@ table.formula-history {
     }
 }
 
-@media (max-width: 420px) { 
+@media (max-width: 420px) {
 
-  
+
   #error_explanation {
         margin: 7px;
   }
-    
+
   body {
       font-size: 16px;
   }
-  
+
   .container-fluid {
     padding-left: 5px !important;
     padding-right: 5px !important;
   }
-  
+
   .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
   .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
   .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
@@ -375,58 +401,58 @@ table.formula-history {
     padding-left: 5px !important;
     padding-right: 5px !important;
   }
-  
+
   .btn {
     font-size: 1em !important;
   }
-  
+
   .row {
     margin-left: -5px !important;
     margin-right: -5px !important;
   }
-  
+
  // PANELS  & WELLS
-  
+
   .panel, .well {
     padding: 5px !important;
     margin-bottom: 15px !important;
   }
-  
+
   .panel-heading {
       padding: 10px 5px !important;
   }
-  
+
   .panel-body {
     padding: 5px !important;
   }
-  
+
   .panel-footer {
     padding: 5px !important;
   }
-  
+
   .table {
     // font-size: .8em;
   }
-  
-  // 
+
+  //
   #formula-header {
       font-size: 1em;
       margin-bottom: .3em;
   }
-  
+
   .user-links {
     // border-color: #31778F;
     a:first-child {
       margin-bottom: 1px;
     }
   }
-  
+
   .form-control {
     font-size: 16px;
   }
-  
+
   .jumbo-icon {
     font-size: 3em;
   }
-  
+
 }

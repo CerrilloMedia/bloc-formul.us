@@ -10,7 +10,7 @@
     <% end %>
     <div class="btn-group">
       <span class="btn btn-success inactive">Formula for </span>
-      <%= link_to user_path(@user), class: 'btn btn-default' do %>
+      <%= link_to @user, class: 'btn btn-default' do %>
         <%= @user.full_name %>
       <% end %>
     </div>
@@ -21,7 +21,7 @@
   <div class="formula-card-header" >f</div>
   <div class="panel panel-default formula-card">
     <div class="panel-body">
-      <h4 class="font-weight-bold"><%= @formula.service_type %></h4>
+      <h4 class="font-weight-bold text-center"><%= @formula.service_type %></h4>
       <hr>
       <p><%= @formula.formulation %></p>
     </div>
@@ -33,7 +33,7 @@
     <div class="user-links pull-right panel">
       <%= link_to formulas_path(copy: @formula.id), method: :post, class: 'btn btn-sm btn-default' do %>
         <%= icon('copy') %> COPY
-      <% end %>    
+      <% end %>
       <%= link_to edit_formula_path(@formula), class: 'btn btn-sm btn-default' do %>
         <%= icon('pencil-square-o') %> EDIT
       <% end %>
