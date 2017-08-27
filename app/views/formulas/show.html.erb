@@ -5,9 +5,6 @@
     <%= link_to @user, class: 'btn btn-default' do %><%= @user.full_name %><% end %>
   </div>
   <% else %>
-    <%= link_to users_path, class: 'btn btn-default hidden-xs' do %>
-      Guests
-    <% end %>
     <div class="btn-group">
       <span class="btn btn-success inactive">Formula for </span>
       <%= link_to @user, class: 'btn btn-default' do %>

@@ -3,7 +3,7 @@
         <% if current_user.client? %>
             Artist
         <% elsif current_user.artist? %>
-            Client 
+            Client
         <% else %>
             All Users
         <% end %>
@@ -23,15 +23,15 @@
                             <% else %>
                                 <small><%= user.email %></small><br>
                             <% end %>
-                            
+
                             <% if user.formulas %>
                                 <% if user.artist? %>
                                     <span class="text-muted small"><small><%= user.guest_formulas.size %> formulas accross <%= pluralize(user.connection_ids.size, 'guests') %></small></span>
                                 <% else %>
-                                    <span class="text-muted small"><small><%= user.formulas.size %> formulas accross <%= pluralize(user.connection_ids.size, 'artist') %></small></span>
+                                    <span class="text-muted small"><small><%= user.formulas.size %> formulas accross <%= pluralize(user.inverse_salon_connections.count, 'artist') %></small></span>
                                 <% end %>
                             <% end %>
-                            
+
                         <% end %>
                     </div>
                 <div class="user-links text-right">
@@ -44,7 +44,7 @@
                         <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete" do %>
                             <i class="fa fa-user-times"></i>
                         <% end %>
-                    
+
                     <% else %>
                             <%= link_to salon_connections_path(salon_user_id: user.id), class: 'btn btn-success', method: :post, title: "Connect" do %>
                                 <i class="fa fa-user-plus"></i>

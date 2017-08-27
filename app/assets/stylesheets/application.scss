@@ -168,10 +168,14 @@ a {
 }
 
 .services-list > tbody {
+  tr:first-child {
+    background: #31778f !important;
+    color: white !important;
+  }
   tr {
     th, td {
     padding: 0px 5px;
-    font-size: .8em;
+    font-size: .9em;
     line-height: 2em;
       a {
         text-decoration: none;
@@ -184,7 +188,7 @@ a {
     }
   }
   tr:hover td {
-    background: #56e39f !important;
+    background: rgba(86, 227, 159, 0.5) !important;
     cursor: pointer;
   }
 }
@@ -264,7 +268,7 @@ a {
     }
     a.navbar-brand {
       color: white;
-      text-shadow: 1px 1px 1px #56e39f;
+      text-shadow: 1px 1px 9px #1a404d;
     }
   .navbar-brand > img {
     height: 100%;
@@ -355,9 +359,15 @@ table.formula-history {
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: $screen-sm-min) {
+  #formula-formulation {
+    max-width: 95%;
+    margin: 0 auto;
+    font-size: 1.2em;
+  }
   .navbar {
-      border-radius: 0 !important;
+    border-radius: 0 !important;
+
   }
 }
 

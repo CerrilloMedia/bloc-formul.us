@@ -4,62 +4,64 @@
 
             <div id="history-list" class="panel-body row">
 
-              <h4 class="btn btn-default btn-no-radius btn-full-width teal-background">
-                <% if @formulas.size %>
-                  last <%= pluralize(@formulas.size, 'formula') %>
+              <h4>
+                <% if @formulas.any? %>
+                  <%= pluralize(@formulas.size, 'formula') %>
                 <% else %>
                   no formulas available
                 <% end %>
               </h4>
 
-                 <% if @user.formulas %>
+               <% if @formulas.any? %>
 
-                 <table class="table services-list">
+               <table class="table services-list">
+                    <tr>
+                        <th class="text-left">
+                          services
+                        </th>
+                        <th class="t-date text-right">date</th>
+                    </tr>
+
+                   <% @formulas.each do |formula| %>
+                      <tr data-formula-id="<%= formula.id %>"
+                          data-formulation="<%= formula.formulation %>"
+                          data-formula-service="<%= formula.service_type %>"
+                          data-formula-date="<%= format_datetime(formula.created_at, 'md') %>"
+                          data-is-author="<%= current_user.id == formula.artist_id %>"
+                          data-formula-author="<%= formula.author_name %>"
+                          data-formula-client="<%= formula.client_name %>" >
+                          <td class="text-left">
+                            <%= link_to formula_path(formula), class: '' do %>
+                              <%= formula.service_type %>
+                            <% end %>
+                          </td>
+                          <td class="t-date text-right"><%= format_datetime(formula.created_at, 'md') %></td>
+                        </tr>
                         <tr>
-                            <th class="text-left">
-                              services
-                            </th>
-                            <th class="t-date text-right">date</th>
-                        </tr>
-
-                     <% @formulas.each do |formula| %>
-                        <tr data-formula-id="<%= formula.id %>"
-                            data-formulation="<%= formula.formulation %>"
-                            data-formula-service="<%= formula.service_type %>"
-                            data-formula-date="<%= format_datetime(formula.created_at, 'md') %>"
-                            data-is-author="<%= current_user.id == formula.artist_id %>"
-                            data-formula-author="<%= formula.author_name %>"
-                            data-formula-client="<%= formula.client_name %>" >
-                            <td class="text-left">
-                              <%= link_to formula_path(formula), class: '' do %>
-                                <%= formula.service_type %>
-                              <% end %>
-                            </td>
-                            <td class="t-date text-right"><%= format_datetime(formula.created_at, 'md') %></td>
-                          </tr>
-                          <tr>
-                            <td colspan="2" class="td-no-border-top">
-                              <% if current_user.artist? %>
-                                  <% if current_user.author?(formula) %>
-                                    <span class="text-muted small">for:
-                                      <%= link_to user_path(formula.client_id) do %>
-                                        <%= formula.client_name %>
-                                      <% end %>
-                                    </span>
-                                  <% else %>
-                                    <span class="text-muted small">by: <%= formula.author_name %> </span>
-                                  <% end %>
-                              <% else %>
-                                  <br>
+                          <td colspan="2" class="td-no-border-top">
+                            <% if current_user.artist? %>
+                                <% if current_user.author?(formula) %>
+                                  <span class="text-muted small">for:
+                                    <%= link_to user_path(formula.client_id) do %>
+                                      <%= formula.client_name %>
+                                    <% end %>
+                                  </span>
+                                <% else %>
                                   <span class="text-muted small">by: <%= formula.author_name %> </span>
-                              <% end %>
+                                <% end %>
+                            <% else %>
+                                <br>
+                                <span class="text-muted small">by: <%= formula.author_name %> </span>
+                            <% end %>
 
-                            </td>
-                        </tr>
-                     <% end %>
+                          </td>
+                      </tr>
+                   <% end %>
 
-                    </table>
-                <% end %>
+                  </table>
+              <% else %>
+                <hr>
+              <% end %>
             </div>
 
      </div>
@@ -83,7 +85,7 @@
                     Your most recent formula with:
                     <strong><%= @user.full_name %></strong>
                 <% else %>
-                    Formulas for: <%= @user.full_name %>
+                    Formula for: <%= @user.full_name %>
                 <% end %>
             </div>
 
@@ -114,9 +116,9 @@
                  <div class="formula-service-type visible-xs text-center">
                    <span>
                      <%= @formula.service_type %>
-                 </span>
+                   </span>
                  </div>
-                     <hr class="visible-xs">
+                <hr class="visible-xs">
                  <div id="formula-formulation">
                      <%= @formula.formulation %>
                  </div>
@@ -140,6 +142,8 @@
                      Note body
                  </div>
              </div>
+        <% else %>
+          <hr >
         <% end %>
      </div>
  </div>
