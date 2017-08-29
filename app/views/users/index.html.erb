@@ -9,6 +9,9 @@
         <% end %>
         listing
     </div>
+    <div id="user_search">
+      <%= render partial: 'user_search', locals: { user: current_user } %>
+    </div>
 </div>
 <br>
 

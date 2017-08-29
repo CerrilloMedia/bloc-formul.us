@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name.capitalize} #{self.last_name}"
+    if self.first_name && self.last_name
+      "#{self.first_name.capitalize} #{self.last_name}"
+    else
+      "#{self.email}"
+    end
   end
 
   def self.matches(user_id)
@@ -40,12 +44,11 @@ class User < ActiveRecord::Base
     ids = []
     SalonConnection.where("user_id = ? OR salon_user_id = ?", self.id, self.id ).map { |connection|
        ids << if connection.user_id == self.id
-                           connection.salon_user_id
-                         else
-                           connection.user_id
-                         end
+               connection.salon_user_id
+             else
+               connection.user_id
+             end
     };
-
     ids
   end
 

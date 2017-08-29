@@ -3,18 +3,27 @@ class UsersController < ApplicationController
 
   def index
 
-    @users =  if current_user.artist?
+    # if params[:invitation_recipient]
+    #   @invite = params[:invitation_recipient]
+    #
+    #   if
+    #
+    # end
+
+    users =  if current_user.artist?
                     User.client
               elsif current_user.admin?
                   User.all
               else
                   User.artist
               end
+    @users = users.select do |u| u.confirmed? || u.invited_by_id == current_user.id end
 
-        @connection_ids = current_user.connection_ids
+    @connection_ids = current_user.connection_ids
   end
 
   def show
+
     @user = User.find(params[:id])
 
     unless current_user.artist? && @user.client? || current_user.connection_ids.include?(@user.id) || current_user.is_self?(@user)
