@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, if: :new_record?
 
   validates :first_name, :last_name, presence: true, length: { maximum: 20 }
+  validates_format_of :email, with: email_regexp
 
   enum role: [:client, :artist, :admin]
 
@@ -50,6 +51,24 @@ class User < ActiveRecord::Base
              end
     };
     ids
+  end
+
+  def self.search(search)
+      if search.split.count > 1
+        terms = search.split
+        return where("first_name LIKE ? AND last_name LIKE ?", "%#{terms.first}%", "%#{terms.last}%" )
+      else
+        return where("email LIKE ? OR first_name LIKE ? OR last_name LIKE ?", search, search, search )
+      end
+  end
+
+  def invite_new(email)
+    if User.find_by(email: email).empty?
+      puts "message sent!"
+      User.invite!( email, self)
+      puts self
+      self.increment!(:invitations_count)
+    end
   end
 
   def is_self?(user)

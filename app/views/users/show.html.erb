@@ -29,7 +29,8 @@
                           data-formula-date="<%= format_datetime(formula.created_at, 'md') %>"
                           data-is-author="<%= current_user.id == formula.artist_id %>"
                           data-formula-author="<%= formula.author_name %>"
-                          data-formula-client="<%= formula.client_name %>" >
+                          data-formula-client="<%= formula.client_name %>"
+                          class= <%= "sidebar-bg" if @formulas.first == formula %> >
                           <td class="text-left">
                             <%= link_to formula_path(formula), class: '' do %>
                               <%= formula.service_type %>
@@ -50,8 +51,11 @@
                                   <span class="text-muted small">by: <%= formula.author_name %> </span>
                                 <% end %>
                             <% else %>
-                                <br>
-                                <span class="text-muted small">by: <%= formula.author_name %> </span>
+                                <span class="text-muted small">by:
+                                  <%= link_to user_path(formula.artist_id) do %>
+                                    <%= formula.author_name %>
+                                  <% end %>
+                                </span>
                             <% end %>
 
                           </td>
@@ -112,23 +116,21 @@
              <div class="formula-card-header">
                  f
              </div>
-             <div class="panel panel-body formula-card">
+             <div id="formula-card-formulation" data-formula-id="<%= @formula.id %>" class="panel panel-body formula-card">
                  <div class="formula-service-type visible-xs text-center">
                    <span>
                      <%= @formula.service_type %>
                    </span>
                  </div>
                 <hr class="visible-xs">
-                 <div id="formula-formulation">
-                     <%= @formula.formulation %>
-                 </div>
+                 <div id="formula-formulation"><%= @formula.formulation %></div>
                  <div class='formula-card-footer pull-right'>
                     created on  <span class="formula-card-date"><%= format_datetime(@formula.created_at,'md') %></span> by <span class='formula-card-author'><%= @formula.author_name %></span>
                  </div>
              </div>
              <div id="formula-client-note" class="formula-note col-xs-12 well hidden">
                  <div class="note-header">
-                     Note header [public/private] & date_created
+                     Note header [public/private] &amp; date_created
                  </div>
                  <div class="note-body">
                      Note body
@@ -136,7 +138,7 @@
              </div>
              <div id="formula-artist-note" class="formula-note col-xs-12 well hidden">
                  <div class="note-header">
-                     Note header [public/private] & date_created
+                     Note header [public/private] &amp; date_created
                  </div>
                  <div class="note-body">
                      Note body

@@ -1,8 +1,8 @@
 <div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
 
-<div class="panel panel-default">
-  <div class="panel-heading">
+<div class="panel-body">
+  <div class="panel">
     <h4>Complete formula history
     <% if @user.artist? && !current_user.is_self?(@user)%>with<% else %>for<% end %>
 
@@ -10,7 +10,6 @@
         <strong class=""><%= @user.full_name %></strong>
       <% end %>
     </h4>
-    <br>
     <div class="">
         <small><i><%= pluralize(@formulas.size, "total formula") %></i></small>
     </div>
@@ -40,7 +39,7 @@
         <%= link_to formula_path(formula), class: '' do %>
           <%= formula.service_type %>
           <br>
-          <strong><span class="hidden-xs"><%= formula.formulation %><br></span></strong>
+          <strong><span class="hidden-xs" data-formula-id="<%= formula.id %>"><%= formula.formulation %><br></span></strong>
         <% end %>
         <% if @user.client? %>
           <small><i>artist: <%= formula.author_name %></i></small>

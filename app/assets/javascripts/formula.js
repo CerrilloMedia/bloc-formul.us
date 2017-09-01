@@ -2,9 +2,13 @@ $(document).on('turbolinks:load', function () {
   $("tr[data-formula-id]").click(function(e) {
     e.preventDefault();
 
+    $("tr[data-formula-id]").removeClass("sidebar-bg");
+    $(this).toggleClass("sidebar-bg");
+
+
     // parse existing data from <tr>
     $('.formula-service-type span').html($(this).data('formula-service'));
-    $('#formula-formulation').html($(this).data('formulation'));
+    $('#formula-formulation').text($(this).data('formulation'));
     $('.formula-card-author').html($(this).data('formula-author'));
     $('.formula-card-date').html($(this).data('formula-date'));
 
@@ -23,6 +27,14 @@ $(document).on('turbolinks:load', function () {
       $('#formula-copy').attr('href', '/formulas?copy=' + id);
     };
 
+  });
+  
+    // TOGGLE FORMULAS#INDEX
+    // $("span[data-formula-id]").closest('a').click(function(e) {
+    //   e.preventDefault();
+    //   $(this).children('strong').toggle(300);
+    // });
+
     // If I prefer to include server calls to get most recent formula information
     // var id = $(this).data('formula-id');
     // console.log(id);
@@ -37,6 +49,4 @@ $(document).on('turbolinks:load', function () {
     //   $('.formula-card-date').html(date_string);
     //
     // });
-
-  });
 });

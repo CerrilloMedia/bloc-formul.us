@@ -1,0 +1,56 @@
+<% if users.any? %>
+
+  <% users.each do |user| %>
+      <div class="col-xs-12 col-sm-6 col-md-4 panel">
+          <div class="panel-body formula-card">
+                      <div class="col-xs-8 col-sm-12">
+                          <%= link_to user_path(user) do %>
+                              <% if user.first_name && user.last_name %>
+                                  <%= user.full_name %><br>
+                              <% else %>
+                                  <small><%= user.email %></small><br>
+                              <% end %>
+
+                              <% if user.formulas %>
+                                  <% if user.artist? %>
+                                      <span class="text-muted small"><small><%= user.guest_formulas.size %> formulas accross <%= pluralize(user.connection_ids.size, 'guests') %></small></span>
+                                  <% else %>
+                                      <span class="text-muted small"><small><%= user.formulas.size %> formulas accross <%= pluralize(user.inverse_salon_connections.count, 'artist') %></small></span>
+                                  <% end %>
+                              <% end %>
+
+                          <% end %>
+                      </div>
+                  <div class="user-links text-right">
+                      <% if connection_ids.include?(user.id) %>
+                          <% if current_user.artist? %>
+                                  <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default' do %>
+                                      <%= icon('pencil-square-o') %><span class="hidden-xs"> New Formula</span>
+                                  <% end %>
+                          <% end %>
+                          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete" do %>
+                              <i class="fa fa-user-times"></i>
+                          <% end %>
+
+                      <% else %>
+                              <%= link_to salon_connections_path(salon_user_id: user.id), class: 'btn btn-success', method: :post, title: "Connect" do %>
+                                  <i class="fa fa-user-plus"></i>
+                              <% end %>
+                      <% end %>
+                  </div>
+          </div>
+        </div>
+  <% end %>
+<% else %>
+  <div class=" col-xs-12 col-sm-8 col-sm-offset-2 text-center">
+    <span class="col-xs-12">No user found feel free to invite them!</span>
+
+    <%= form_for( :user, as: :email, url: user_invitation_path ) do |f| %>
+      <span class="input-group panel" >
+          <%= f.label :email, class: 'input-group-addon' %>
+          <%= f.text_field :email, class: 'form-control' %>
+      </span>
+      <%= f.submit 'Invite!', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+<% end %>

@@ -15,3 +15,13 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+
+// TOGGLE SEARCH IN USERS#INDEX
+// $(document).on('turbolinks:load', function () {
+//   $('.toggle-search').on("click", function () {
+//    $('.user-search').slideToggle(100, function() {
+// 		$('#user-search-form input').focus();
+//    });
+//   });
+// });

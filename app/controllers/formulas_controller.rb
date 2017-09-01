@@ -10,17 +10,17 @@ class FormulasController < ApplicationController
                 when current_user.is_self?(@user)
                   if @user.client?
                     # guests can see their whole history
-                    @user.formulas.first(10)
+                    @user.formulas.first(4)
                   else
                     # artists would see their complete client history
-                    @user.guest_formulas.first(10)
+                    @user.guest_formulas.first(6)
                   end
                 when current_user.client? && @user.artist?
                   # when a client visists an artists page, should only return their own client history with specific artist.
-                  @user.guest_formulas.where('client_id = ?', current_user.id)
+                  @user.guest_formulas.where('client_id = ?', current_user.id).first(4)
                 when current_user.artist? && @user.client?
                   # when artist visits any client page it shows clients entire general history
-                  @user.formulas
+                  @user.formulas.first(6)
                 when current_user.artist? && @user.artist?
                   @user.guest_formulas
                 end
@@ -83,7 +83,7 @@ class FormulasController < ApplicationController
       flash[:notice] = params[:copy] ? "Formula successfully copied" : "NEW Formula saved!"
       redirect_to current_user.artist? ? @formula : current_user
     else
-      flash[:alert] = @formula.errors.messages
+      flash[:alert] = "Error saving formula, please try again."
       redirect_to request.referrer
     end
 

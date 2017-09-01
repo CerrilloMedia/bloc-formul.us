@@ -50,12 +50,20 @@ a {
   text-decoration: none !important;
 }
 
-.green-background {
+textarea {
+  resize: vertical;
+}
+
+.green-bg {
   background: #56E39F;
   color: white;
 }
 
-.teal-background {
+.blue-bg {
+  background: #31778f !important;
+}
+
+.teal-bg {
   background: #56e39f !important;
 }
 // PANELS & WELLS
@@ -193,6 +201,10 @@ a {
   }
 }
 
+.sidebar-bg {
+  background: rgba(86, 227, 159, 0.5) !important;
+}
+
 
 
 // MAIN PANEL
@@ -237,6 +249,7 @@ a {
   line-height: 1.5em;
   min-height: 4.5em;
   position: relative;
+  white-space: pre-line;
   .formula-card-backgrond {
     width: 100%;
   }
@@ -255,7 +268,7 @@ a {
 // NAVBAR UPDATES:
 .navbar-inverse {
     background-color: #31778f;
-    border-color: #aa9922;
+    border-color: #225161;
     .navbar-nav > li > a {
      color: rgba(255, 255, 255, 0.7);
     }
@@ -275,6 +288,10 @@ a {
   }
 }
 
+.artist-header {
+  box-shadow: 0px 6px #56e39f;
+  border: transparent;
+}
 
 // FOOTER (STICKY)
 .footer {
@@ -296,6 +313,24 @@ a {
         color: #fff;
         text-decoration: none;
       }
+}
+
+.footer-menu {
+  .btn:hover {
+    color: #fff;
+  }
+  .dropdown-menu {
+  ul {
+    padding: 0;
+    text-align: center;
+    li {
+      list-style: none;
+      a:hover {
+        color: #31778f;
+      }
+    }
+  }
+}
 }
 
 // USERS#SHOW
@@ -337,16 +372,20 @@ table.formula-history {
 
 .formulation-input {
   resize: vertical !important;
+  font-size: 1.2em;
 }
 
+.alter-links * {
+  margin: 0 .3em;
+}
 
+// DEVISE ERRORS
 #error_explanation {
-  border: 1px solid #56e39f;
-    padding: 0px;
-    margin: 10px;
+  padding: 0px;
+  margin: 10px;
 
   h2 {
-    background: #56e39f;
+    display: none;
     margin-top: 0;
     padding: 2px;
   }
@@ -359,16 +398,38 @@ table.formula-history {
 
 }
 
+// User#index
+.user-search {
+  display: inline-flex;
+}
+
+#user-search-form {
+  display: inline-flex;
+  .form-control {
+    width: auto;
+  }
+  .form-control:focus {
+    border-color: #56e39f;
+  }
+  input {
+    background: transparent;
+    color: white;
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   #formula-formulation {
     max-width: 95%;
     margin: 0 auto;
     font-size: 1.2em;
   }
+  .formulation-input {
+    font-size: 1.2em;
+  }
   .navbar {
     border-radius: 0 !important;
-
   }
+
 }
 
 @media (max-width: $screen-xs-max) {
@@ -377,6 +438,12 @@ table.formula-history {
     }
     .pull-xs-right {
         float: right;
+    }
+    .text-xs-center {
+      text-align: center !important;
+    }
+    .navbar {
+      margin-bottom: 5px !important;
     }
 }
 

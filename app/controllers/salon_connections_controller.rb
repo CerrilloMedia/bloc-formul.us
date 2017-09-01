@@ -9,9 +9,10 @@ class SalonConnectionsController < ApplicationController
                           end
 
 
+
       if @salon_connection.save
-        flash[:notice] = "Now connected to user."
         @user = User.find(params[:salon_user_id])
+        flash[:notice] = "Now connected to #{@user.full_name}."
         redirect_to local_request?(request.referrer) ? request.referrer : @user
       else
         flash[:alert] = "Error connecting to user"

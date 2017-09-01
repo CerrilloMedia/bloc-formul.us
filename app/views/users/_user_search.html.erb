@@ -1,1 +1,9 @@
-Search functionality coming soon!
+<div class="input-group">
+  <%= form_tag(users_path, :method => "get", id: "user-search-form", enforce_utf8: false) do %>
+    <%= text_field_tag :search, params[:search], options = { method: :get, class: 'form-control' } %>
+
+      <%= button_tag( type: "submit", name: nil, class: 'form-control btn-success') do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+  <% end %>
+</div>
