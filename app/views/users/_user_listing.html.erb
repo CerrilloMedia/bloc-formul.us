@@ -1,15 +1,19 @@
 <% if users.any? %>
 
-  <% users.each do |user| %>
-      <div class="col-xs-12 col-sm-6 col-md-4 panel">
-          <div class="panel-body formula-card">
-                      <div class="col-xs-8 col-sm-12">
+  <% users.each_with_index do |user, index| %>
+      <div class="col-xs-12 col-sm-6 col-md-4 panel-body">
+          <div class="panel teal-border wht-bg">
+              <div class="panel-body">
+                      <div class="pull-left">
                           <%= link_to user_path(user) do %>
-                              <% if user.first_name && user.last_name %>
-                                  <%= user.full_name %><br>
-                              <% else %>
-                                  <small><%= user.email %></small><br>
-                              <% end %>
+                            <% unless user.confirmed? %>
+                              <small><i class="fa fa-hourglass-o"></i></small>
+                            <% end %>
+                                <% if user.first_name && user.last_name %>
+                                    <%= user.full_name %><br>
+                                <% else %>
+                                    <small><%= user.email %></small><br>
+                                <% end %>
 
                               <% if user.formulas %>
                                   <% if user.artist? %>
@@ -21,7 +25,7 @@
 
                           <% end %>
                       </div>
-                  <div class="user-links text-right">
+                  <div class="text-right col-xs-12 user-links pull-right row">
                       <% if connection_ids.include?(user.id) %>
                           <% if current_user.artist? %>
                                   <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default' do %>
@@ -39,14 +43,23 @@
                       <% end %>
                   </div>
           </div>
+          </div>
         </div>
+
+<% if index % 3 == 2 %>
+<span class="hidden-xs hidden-sm clearfix"></span>
+<% elsif index % 2 == 1 %>
+<span class="visible-sm clearfix"></span>
+
+<% end %>
+
   <% end %>
 <% else %>
   <div class=" col-xs-12 col-sm-8 col-sm-offset-2 text-center">
     <span class="col-xs-12">No user found feel free to invite them!</span>
 
     <%= form_for( :user, as: :email, url: user_invitation_path ) do |f| %>
-      <span class="input-group panel" >
+      <span class="input-group panel-body" >
           <%= f.label :email, class: 'input-group-addon' %>
           <%= f.text_field :email, class: 'form-control' %>
       </span>

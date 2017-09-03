@@ -2,7 +2,7 @@
     <div class="text-center">
       <i class="fa fa-edit"></i> edit formula for <%= @user.full_name %>
     </div>
-  <div class="panel">
+  <div class="panel-body">
     <div class="panel-body text-center formula-form">
 
       <%= form_for @formula do |f| %>
@@ -10,7 +10,7 @@
           <%= f.number_field :client_id, disabled: false, type: 'hidden'  %>
 
           <div class="form-group row">
-            <div class="col-sm-10 col-sm-offset-1 formula-card">
+            <div class="col-sm-10 col-sm-offset-1 formula-card wht-bg">
              <div class="formula-card-header row">
                  f
              </div>
@@ -25,6 +25,7 @@
           </div>
         </div>
       <% end %>
+
     </div>
   </div>
 </div>

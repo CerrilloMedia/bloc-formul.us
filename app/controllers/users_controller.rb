@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   def index
 
     @users =  if current_user.artist?
-                  User.client
+                  User.confirmed_client
               elsif current_user.client?
-                  User.artist
+                  User.confirmed_artist
               else
                   User.all
               end
@@ -15,7 +15,9 @@ class UsersController < ApplicationController
     @connection_ids = current_user.connection_ids
 
     if params[:search]
-      @users = @users.search(params[:search]) unless params[:search].empty?
+      @users = @users.search(params[:search]) unless params[:search].strip.empty?
+    else
+      params[:search] = ""
     end
 
     if params[:email] && @users.empty?
@@ -57,7 +59,7 @@ class UsersController < ApplicationController
                   []
                 end
 
-    @formula = @formulas ? @formulas.first : []
+    @formula = @formulas ? @formulas.first : nil
 
   end
 

@@ -19,6 +19,13 @@
  @import "font-awesome";
 
 
+.brand {
+  font-family: 'Niconne', cursive;
+}
+
+.jumbotron {
+  background-color: #ffffff;
+}
 
 * {
   font-family: 'Muli', sans-serif;
@@ -33,6 +40,7 @@ body {
   position: relative;
   min-height: 100%;
   font-size: 16px;
+  background: rgba(238, 238, 238, 0.5);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -66,16 +74,33 @@ textarea {
 .teal-bg {
   background: #56e39f !important;
 }
+
+.teal-border {
+  border: 1px solid #56E39F;
+}
+
+.navy-bg {
+  background: #364156 !important;
+}
+
+.wht-bg {
+  background: #fff !important;
+}
+
 // PANELS & WELLS
 .panel, .well {
   border-radius: 0 !important;
   box-shadow: none;
-  padding: 10px;
+  padding: 5px;
   margin-bottom: 10px;
 }
 
 .panel-body {
   padding: 5px;
+}
+
+.panel-footer {
+  background: #f6f6f6;
 }
 
 // BUTTON OVERRIDES
@@ -151,7 +176,7 @@ textarea {
 
 .benefits-panel {
   margin-bottom: 2em;
-  .user-links {
+  row .user-links {
     .bt {
     border-radius: 2px !important;
     }
@@ -211,6 +236,10 @@ textarea {
 #main-panel {
 // background: rgba(231, 209, 55, 0.71);
  height: 100%;
+}
+
+.main-body {
+  margin-bottom: 150px
 }
 
 #user-header {
@@ -293,6 +322,19 @@ textarea {
   border: transparent;
 }
 
+.admin-header {
+  background: #56E3A0;
+  border: transparent;
+  div ul li {
+    a {
+      color: #31778f !important;
+    }
+    a:hover {
+      color: #fff !important;
+    }
+  }
+}
+
 // FOOTER (STICKY)
 .footer {
   // sticky footer
@@ -313,6 +355,18 @@ textarea {
         color: #fff;
         text-decoration: none;
       }
+}
+
+.footer-logo {
+  position: fixed;
+    bottom: 60px;
+    width: 100%;
+    font-size: xx-large;
+    z-index: -10;
+    opacity: .5;
+    span {
+      text-shadow: 1px 1px 0px rgb(255, 255, 255)
+    }
 }
 
 .footer-menu {
@@ -342,9 +396,17 @@ textarea {
 }
 
 table.formula-history {
-  tr {
-    th {
-      border-top:none;
+  tbody {
+    tr:not(:first-child) {
+      background: rgba(255,255,255,.7);
+      th {
+        border-top:none;
+      }
+    }
+    tr:first-child {
+      th {
+        border-top: 0px;
+      }
     }
   }
 }
@@ -410,10 +472,15 @@ table.formula-history {
   }
   .form-control:focus {
     border-color: #56e39f;
+    background: rgba(255, 255, 255, 0.5);
   }
   input {
     background: transparent;
-    color: white;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: inherit;
+    text-align: center;
+    box-shadow: none;
   }
 }
 
@@ -433,6 +500,10 @@ table.formula-history {
 }
 
 @media (max-width: $screen-xs-max) {
+    .alert {
+      margin-top: -5px;
+    }
+
     .pull-xs-left {
         float: left;
     }

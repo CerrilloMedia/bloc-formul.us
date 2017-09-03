@@ -13,13 +13,13 @@
   </div>
 
   <% if devise_mapping.rememberable? -%>
-    <div class="panel">
+    <div class="panel-heading">
       <%= f.check_box :remember_me, type: 'checkbox', class: '' %>
       <%= :remember_me %>
     </div>
   <% end -%>
 
-  <div class="panel">
+  <div class="panel-heading">
     <%= f.submit "Log in", class: 'btn btn-default' %>
   </div>
 <% end %>

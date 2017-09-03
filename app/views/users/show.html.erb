@@ -5,14 +5,14 @@
             <div id="history-list" class="panel-body row">
 
               <h4>
-                <% if @formulas.any? %>
+                <% if @formulas %>
                   <%= pluralize(@formulas.size, 'formula') %>
                 <% else %>
                   no formulas available
                 <% end %>
               </h4>
 
-               <% if @formulas.any? %>
+               <% if @formulas %>
 
                <table class="table services-list">
                     <tr>

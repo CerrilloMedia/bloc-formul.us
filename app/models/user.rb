@@ -23,6 +23,11 @@ class User < ActiveRecord::Base
 
   enum role: [:client, :artist, :admin]
 
+  # default_scope { where("confirmed_at IS NOT NULL") }
+
+  scope :confirmed_client, -> { where("confirmed_at IS NOT NULL AND role = 0") }
+  scope :confirmed_artist, -> { where("confirmed_at IS NOT NULL AND role = 1") }
+
   def set_default_role
     self.role ||= :client
   end
@@ -53,12 +58,13 @@ class User < ActiveRecord::Base
     ids
   end
 
+  # SEARCH QUERY
   def self.search(search)
       if search.split.count > 1
         terms = search.split
-        return where("first_name LIKE ? AND last_name LIKE ?", "%#{terms.first}%", "%#{terms.last}%" )
+        return where("first_name LIKE ? OR last_name LIKE ?", "%#{terms.first}%", "%#{terms.last}%" )
       else
-        return where("email LIKE ? OR first_name LIKE ? OR last_name LIKE ?", search, search, search )
+        return where("email LIKE ? OR first_name LIKE ? OR last_name LIKE ?", "%#{search}%","%#{search}%","%#{search}%" )
       end
   end
 

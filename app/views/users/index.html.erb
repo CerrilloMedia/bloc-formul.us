@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 text-center benefits-heading panel">
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2 text-center panel-body">
 <div class="col-xs-12 col-sm-8 text-xs-center">
   <div class="col-xs-12 panel-body" >Displaying
         <% if current_user.client? %>
@@ -6,17 +6,15 @@
         <% elsif current_user.artist? %>
           <%= pluralize(@users.count, "client") %>
         <% else %>
-            All Users
+            All <%= pluralize(@users.count, "users") %>
         <% end %>
-      </div>
-      </div>
-        <div class="user-search">
-          <%= render partial: 'user_search', locals: { user: current_user } %>
-        </div>
-
+  </div>
+  </div>
+    <div class="user-search">
+      <%= render partial: 'user_search', locals: { user: current_user } %>
+  </div>
 </div>
-<br>
-
 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+  <hr>
     <%= render partial: 'user_listing', locals: { users: @users, connection_ids: @connection_ids } %>
 </div>

@@ -3,9 +3,9 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-  <div class="panel">
+  <div class="wht-bg panel-body teal-border">
 
-  <div class="text-center blue-bg">
+  <div class="text-center">
     <div class="panel-body col-sm-6">
       <%= f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: 'first name' %>
     </div>
@@ -17,7 +17,7 @@
       <%= f.email_field :email, class: 'form-control', autofocus: true, placeholder: 'e-mail (required)' %>
     </div>
   </div>
-  <div class="text-center blue-bg">
+  <div class="text-center">
     <div class="panel-body">
       <%= f.label :password, class: "col-xs-12" %>
 
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-    <div class="panel-body">
+    <div class="panel-heading">
       <%= f.submit "Sign up", class: 'btn btn-default' %>
     </div>
   </div>

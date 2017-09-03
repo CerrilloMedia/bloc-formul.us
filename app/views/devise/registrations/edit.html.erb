@@ -3,7 +3,7 @@
   <h3>Update Profile</h3>
 </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'formula-card' } ) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'formula-card wht-bg' } ) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="panel-body">
@@ -68,7 +68,7 @@
 <% end %>
 
 
-    <div class="panel">
+    <div class="panel-footer">
         <span class="panel-body">Unhappy?</span>
         <%= link_to registration_path(resource_name), class: 'btn', data: { confirm: "Are you sure?" }, method: :delete do %>
           <i class="fa fa-trash-o"></i> Cancel Account

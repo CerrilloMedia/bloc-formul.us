@@ -8,10 +8,10 @@ class Formula < ActiveRecord::Base
     validates :client_name,         presence: true
 
     belongs_to :user
-    
+
     before_validation :set_salon_connection, on: :create
     before_validation :set_names, on: :create
-
+    before_validation :trim_whitespace, on: [:create,:update]
     before_validation :check_for_self
 
     def author_name
@@ -48,6 +48,10 @@ class Formula < ActiveRecord::Base
            self.author_name = User.find(artist_id).full_name
            self.client_name = User.find(client_id).full_name
         end
+    end
+
+    def trim_whitespace
+      self.formulation = self.formulation.strip
     end
 
 end

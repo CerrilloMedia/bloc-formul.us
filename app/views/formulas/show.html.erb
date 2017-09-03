@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-10 col-sm-offset-1 panel">
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 panel-heading">
   <% if current_user.is_self?(@user) %>
   <div class="btn-group">
     <div class="btn btn-success">Formula for</div>
@@ -14,7 +14,7 @@
   <% end %>
 </div>
 
-<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 panel-heading">
   <div class="formula-card-header" >f</div>
   <div class="panel panel-default formula-card">
     <div class="panel-body">
@@ -27,7 +27,7 @@
     <small class="text-muted col-sm-8 col-xs-12 row">submitted by <%= link_to @artist.full_name, user_path(@artist) %> on <%= format_datetime(@formula.updated_at, 'mdy') %></small>
   </div>
   <% if current_user.connection_ids.include?(@user.id) && current_user.artist? %>
-    <div class="user-links pull-right panel">
+    <div class="user-links pull-right panel-heading">
       <%= link_to formulas_path(copy: @formula.id), method: :post, class: 'btn btn-sm btn-default' do %>
         <%= icon('copy') %> COPY
       <% end %>

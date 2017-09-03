@@ -2,7 +2,7 @@
     <div class="text-center">
       <i class="fa fa-edit"></i> new formula for <%= @user.full_name %>
     </div>
-  <div class="panel">
+  <div class="panel-body">
     <div class="panel-body text-center formula-form">
 
       <%= form_for Formula.new do |f| %>
@@ -10,7 +10,7 @@
         <%= f.number_field :client_id, value: params[:client_id], disabled: false, type: 'hidden'  %>
 
         <div class="form-group row">
-          <div class="col-sm-10 col-sm-offset-1 formula-card"><div class="formula-card-header row">f</div>
+          <div class="col-sm-10 col-sm-offset-1 formula-card wht-bg"><div class="formula-card-header row">f</div>
           <%= f.text_field :service_type, class: 'form-control  xs-input', placeholder: 'service type' %>
           <hr>
           <%= f.text_area :formulation, class: 'form-control  xs-input formulation-input', rows:5, placeholder: 'formulation' %>

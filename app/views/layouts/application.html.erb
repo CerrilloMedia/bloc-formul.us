@@ -12,20 +12,11 @@
 <body>
 <div id="wrapper">
   <div class="container-fluid">
-  <% if current_user %>
-    <div class="clearfix hidden">
-        <div class="pull-left">
-          <%= current_user.role %>:USER #<%= current_user.id %> / visiting <%= @user.role if @user %>:USER #<%= @user.id if @user %>
-        </div>
-    </div>
-  <% else %>
-    <div class="clearfix hidden">
-      VISITOR
-    </div>
-  <% end %>
 
     <div class="row">
-      <nav class="navbar navbar-toggleable-lg navbar-inverse <%= "artist-header" if current_user && current_user.artist? %>">
+      <nav class="navbar navbar-toggleable-lg navbar-inverse
+                  <%= "artist-header" if current_user && current_user.artist? %>
+                  <%= "admin-header" if current_user && current_user.admin? %>">
         <div class="navbar-header">
 
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">
@@ -47,8 +38,10 @@
                   <%= link_to users_path, class: 'nav-link' do %>
                     <% if current_user.artist? %>
                       <i class="fa fa-users"></i> Clients
-                    <% else %>
+                    <% elsif current_user.client? %>
                       <i class="fa fa-users"></i> Artists
+                    <% elsif current_user.admin? %>
+                      <i class="fa fa-users"></i> Users
                     <% end %>
                   <% end %>
                 </li>
@@ -87,11 +80,15 @@
       <% end %>
     <% end %>
 
-    <div class="row">
+    <div class="row main-body">
       <%= yield %>
     </div>
 
     <div class="footer bg-inverse row text-center">
+
+      <div class="footer-logo">
+        <span class="brand">formulus</span>
+      </div>
         <span class="col-sm-6 text-left pull-left">
           <%= link_to root_path do %>
             &copy; Formulus 2017
@@ -123,12 +120,7 @@
           </div>
         </div>
         </div>
-
-
     </div>
-
-
-
   </div>
 </div>
 </body>
