@@ -17,7 +17,12 @@
       <nav class="navbar navbar-toggleable-lg navbar-inverse
                   <%= "artist-header" if current_user && current_user.artist? %>
                   <%= "admin-header" if current_user && current_user.admin? %>">
+
         <div class="navbar-header">
+
+          <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand', title: 'Formulus' do %>
+            formul.us
+          <% end %>
 
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">
             <span class="icon-bar"></span>
@@ -25,9 +30,11 @@
             <span class="icon-bar"></span>
           </button>
 
-          <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand', title: 'Formulus' do %>
-            formul.us
-          <% end %>
+          <div class="navbar-text">
+            <ul class="navbar-nav list-inline">
+              <li class="navbar-link">QuickJot</li>
+            </ul>
+          </div>
 
         </div>
 

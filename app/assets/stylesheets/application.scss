@@ -18,6 +18,10 @@
  @import "font-awesome-sprockets";
  @import "font-awesome";
 
+$blue: #31778f;
+$teal: #56e39f;
+$navy: #364156;
+$dark-grey: #222222;
 
 .brand {
   font-family: 'Niconne', cursive;
@@ -25,6 +29,9 @@
 
 .jumbotron {
   background-color: #ffffff;
+  h1 {
+    font-size: 3.2em;
+  }
 }
 
 * {
@@ -62,29 +69,9 @@ textarea {
   resize: vertical;
 }
 
-.green-bg {
-  background: #56E39F;
-  color: white;
-}
-
-.blue-bg {
-  background: #31778f !important;
-}
-
-.teal-bg {
-  background: #56e39f !important;
-}
-
-.teal-border {
-  border: 1px solid #56E39F;
-}
-
-.navy-bg {
-  background: #364156 !important;
-}
-
-.wht-bg {
-  background: #fff !important;
+.px-2 {
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 // PANELS & WELLS
@@ -105,12 +92,11 @@ textarea {
 
 // BUTTON OVERRIDES
 .btn-default {
-  border-color: #31778F !important;
+  border-color: $blue !important;
 }
 
 .btn {
   border: 2px solid transparent;
-  // padding: .5em .8em;
   font-size: .9em;
   line-height: 1em;
   border-radius: 2em !important;
@@ -118,13 +104,13 @@ textarea {
 
 .btn-success {
   color: #ffffff;
-  background-color: #31778f;
-  border-color: #31778F !important;
+  background-color: $blue;
+  border-color: $teal !important;
 }
 
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   color: #fff;
-  background-color: #31778f;
+  background-color: $blue;
 }
 
 .btn-success:active:hover, .btn-success:active:focus {
@@ -132,14 +118,14 @@ textarea {
 }
 
 .btn-danger {
-  color: #31778f;
+  color: $blue;
   background-color: #ffffff;
-  border-color: #31778F !important;
+  border-color: $blue !important;
 }
 
 .btn-danger:hover, .btn-danger:active, .btn-danger:focus {
   color: #fff;
-  background-color: #31778f;
+  background-color: $blue;
 }
 
 .btn-danger:active:hover, .btn-danger:active:focus {
@@ -163,30 +149,99 @@ textarea {
  padding-bottom: 60px;
 }
 
+.blue-bg {
+  background: $blue !important;
+}
+
+.blue-border {
+  border-color: $blue !important;
+}
+
+.teal-bg {
+  background: $teal !important;
+}
+
+.teal-border {
+  border-color: $teal !important;
+}
+
+.navy-bg {
+  background: $navy !important;
+}
+
+.navy-border {
+  border-color: $navy !important;
+}
+
+.wht-bg {
+  background: #fff !important;
+}
+
 // WELCOME#INDEX
 .splash-jumbotron {
   display: flex;
+  padding: 110px 0px !important;
 }
 
 .jumbo-icon {
   font-size: 4em;
-  color: #364156;
+  color: navy;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 
 .benefits-panel {
   margin-bottom: 2em;
+  background-image: url(https://scontent-sea1-1.cdninstagram.com/t51.2885-15/e35/18380273_1839264873001484_6156265595051442176_n.jpg);
+  background-position: center;
+  background-size: cover;
+  color: white;
+  .navy-bg {
+    background: rgba(49, 119, 143, 0.7) !important;
+  }
+  row {
+    padding: 6em 0;
+    background: rgba(49, 119, 143, 0.7);
+    box-shadow: inset 0 0 5px rgba(49, 119, 143, 0.7);
+
+  }
+  .benefits-heading {
+    background: none !important;
+    color: white;
+  }
+  .jumbo-icon {
+    color: white;
+  }
+  row .user-links {
+    color: white;
+    .bt {
+    border-radius: 2px !important;
+    color: white;
+    }
+  }
+}
+
+.benefits-panel-inv {
+  margin-bottom: 2em;
+  background-image: url(https://instagram.fsea1-1.fna.fbcdn.net/t51.2885-15/e35/17494274_286161841807234_9030565165321420800_n.jpg);
+  background-position: center;
+  background-size: cover;
+  background-position-y: -520px;
+  .white-bg {
+    background: rgba(255, 255, 255, 0.7) !important;
+  }
   row .user-links {
     .bt {
     border-radius: 2px !important;
     }
+  }
+  .benefits-heading {
+    color: navy;
   }
 }
 
 .benefits-heading {
     padding: .5em 0em;
     color: #cdcdcd;
-    background: #364156;
 }
 
 
@@ -200,9 +255,13 @@ textarea {
 //  background: rgba(137, 60, 194, 0.2);
 }
 
+.btn-scrollable {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.34);
+}
+
 .services-list > tbody {
   tr:first-child {
-    background: #31778f !important;
+    background: $blue !important;
     color: white !important;
   }
   tr {
@@ -285,7 +344,7 @@ textarea {
 }
 
 .formula-card-footer {
-  color: #31778f;
+  color: $blue;
     font-style: italic;
     opacity: .7;
     font-size:.8em;
@@ -296,7 +355,7 @@ textarea {
 }
 // NAVBAR UPDATES:
 .navbar-inverse {
-    background-color: #31778f;
+    background-color: $blue;
     border-color: #225161;
     .navbar-nav > li > a {
      color: rgba(255, 255, 255, 0.7);
@@ -327,7 +386,7 @@ textarea {
   border: transparent;
   div ul li {
     a {
-      color: #31778f !important;
+      color: $blue !important;
     }
     a:hover {
       color: #fff !important;
@@ -380,7 +439,7 @@ textarea {
     li {
       list-style: none;
       a:hover {
-        color: #31778f;
+        color: $blue;
       }
     }
   }
@@ -414,7 +473,7 @@ table.formula-history {
 // USERS#FORMULA#NEW/EDIT
 
 .formula-card-header {
-  background: #56e39f;
+  background: $teal;
   color: white;
   text-align: center;
   font-size: 1.5em;
@@ -424,7 +483,7 @@ table.formula-history {
 }
 
 .formula-card {
-  border: 1px solid #56E39F;
+  border: 1px solid $teal;
   padding-bottom: .5em;
   .xs-input {
     border: none;
@@ -471,7 +530,7 @@ table.formula-history {
     width: auto;
   }
   .form-control:focus {
-    border-color: #56e39f;
+    border-color: $teal;
     background: rgba(255, 255, 255, 0.5);
   }
   input {
@@ -485,6 +544,7 @@ table.formula-history {
 }
 
 @media (min-width: $screen-sm-min) {
+
   #formula-formulation {
     max-width: 95%;
     margin: 0 auto;
@@ -500,6 +560,19 @@ table.formula-history {
 }
 
 @media (max-width: $screen-xs-max) {
+  
+    #sidebar {
+      max-height: 150px;
+      overflow-y: scroll;
+    }
+
+    #main-panel {
+      box-shadow: 0px 0px 20px 20px #f6f6f6;
+      border-top: 1px solid #f6f6f6 !important;
+      box-sizing: border-box;
+      background-color: #f6f6f6;
+    }
+
     .alert {
       margin-top: -5px;
     }
@@ -515,6 +588,15 @@ table.formula-history {
     }
     .navbar {
       margin-bottom: 5px !important;
+    }
+
+    .benefits-panel {
+      background-size: auto;
+      background-position: center;
+    }
+    .benefits-panel-inv {
+      // background-size: cover;
+      background-position-y: 0px;
     }
 }
 
@@ -589,7 +671,7 @@ table.formula-history {
   }
 
   .user-links {
-    // border-color: #31778F;
+    // border-color: $blue;
     a:first-child {
       margin-bottom: 1px;
     }
@@ -601,6 +683,10 @@ table.formula-history {
 
   .jumbo-icon {
     font-size: 3em;
+  }
+
+  .splash-jumbotron {
+    font-size: .7em;
   }
 
 }

@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
       self.increment!(:invitations_count)
     end
   end
-
+  
   def is_self?(user)
       self == user
   end

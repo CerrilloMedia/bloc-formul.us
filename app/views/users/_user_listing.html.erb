@@ -28,8 +28,8 @@
                   <div class="text-right col-xs-12 user-links pull-right row">
                       <% if connection_ids.include?(user.id) %>
                           <% if current_user.artist? %>
-                                  <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default' do %>
-                                      <%= icon('pencil-square-o') %><span class="hidden-xs"> New Formula</span>
+                                  <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default', title: 'New Formula' do %>
+                                      <%= icon('pencil-square-o') %><span class="hidden-xs"> New <span class="hidden-sm">Formula</span></span>
                                   <% end %>
                           <% end %>
                           <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete" do %>
@@ -37,7 +37,7 @@
                           <% end %>
 
                       <% else %>
-                              <%= link_to salon_connections_path(salon_user_id: user.id), class: 'btn btn-success', method: :post, title: "Connect" do %>
+                              <%= link_to salon_connections_path(salon_user_id: user.id), class: 'btn btn-success blue-border', method: :post, title: "Connect" do %>
                                   <i class="fa fa-user-plus"></i>
                               <% end %>
                       <% end %>
