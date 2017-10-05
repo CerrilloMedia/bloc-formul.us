@@ -1,18 +1,16 @@
 class User < ActiveRecord::Base
 
-    has_many :salon_connections
-    has_many :salon_users, through: :salon_connections
-    has_many :inverse_salon_connections, class_name: "SalonConnection", foreign_key: "salon_user_id"
-    has_many :inverse_salon_users, through: :inverse_salon_connections, source: :user
+  has_many :salon_connections
+  has_many :salon_users, through: :salon_connections
+  has_many :inverse_salon_connections, class_name: "SalonConnection", foreign_key: "salon_user_id"
+  has_many :inverse_salon_users, through: :inverse_salon_connections, source: :user
 
-    # artists.guest_formulas
-    has_many :guest_formulas, foreign_key: :artist_id, class_name: 'Formula'
+  # artists.guest_formulas
+  has_many :guest_formulas, foreign_key: :artist_id, class_name: 'Formula'
 
-    # client.formulas
-    has_many :formulas, foreign_key: :client_id
+  # client.formulas
+  has_many :formulas, foreign_key: :client_id
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -23,9 +21,7 @@ class User < ActiveRecord::Base
 
   enum role: [:client, :artist, :admin]
 
-  # default_scope { where("confirmed_at IS NOT NULL") }
-
-  scope :confirmed_client, -> { where("confirmed_at IS NOT NULL AND role = 0") }
+  # scope :confirmed_client, -> { where("confirmed_at IS NOT NULL AND role = 0") }
   scope :confirmed_artist, -> { where("confirmed_at IS NOT NULL AND role = 1") }
 
   def set_default_role
@@ -71,12 +67,13 @@ class User < ActiveRecord::Base
   def invite_new(email)
     if User.find_by(email: email).empty?
       puts "message sent!"
-      User.invite!( email, self)
+      user = User.invite!( email, self)
       puts self
       self.increment!(:invitations_count)
     end
+    user
   end
-  
+
   def is_self?(user)
       self == user
   end
@@ -84,6 +81,5 @@ class User < ActiveRecord::Base
   def author?(formula)
     self.id == formula.artist_id
   end
-
 
 end

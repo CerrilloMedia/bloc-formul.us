@@ -34,8 +34,8 @@
                           data-formula-service="<%= formula.service_type %>"
                           data-formula-date="<%= format_datetime(formula.created_at, 'md') %>"
                           data-is-author="<%= current_user.id == formula.artist_id %>"
-                          data-formula-author="<%= formula.author_name %>"
-                          data-formula-client="<%= formula.client_name %>"
+                          data-formula-author="<%= formula.get_author_name %>"
+                          data-formula-client="<%= formula.get_client_name if formula.client_id %>"
                           class= <%= "sidebar-bg" if @formulas.first == formula %> >
                           <td class="text-left">
                             <%= link_to formula_path(formula), class: '' do %>

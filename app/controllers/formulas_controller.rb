@@ -1,7 +1,6 @@
 class FormulasController < ApplicationController
   before_action :authenticate_user!
 
-
   def index
 
     @user = User.find(params[:user_id])
@@ -44,50 +43,48 @@ class FormulasController < ApplicationController
 
   def new
 
-    if current_user.client?
-      flash[:alert] = "You do not have access to creating a formula."
-      redirect_to request.referrer || root_path
-    elsif current_user.connection_ids.include?(params[:requested_user])
-      flash[:alert] = "You must be connected with client before creating a formula."
-      redirect_to request.referrer || user_path(params[:requested_user])
-    end
+    @formula = current_user.guest_formulas.new
 
-    @formula = Formula.new
-
-    @user = User.find(params[:requested_user])
-
-    if current_user.artist?
-      params[:artist_id], params[:client_id]  = current_user.id, @user.id
-    else
-      params[:artist_id], params[:client_id] = @user.id, current_user.id
+    if params[:requested_user]
+      @user = User.find(params[:requested_user])
     end
 
   end
 
   def create
 
-    @formula = if params[:copy]
-                  Formula.find(params[:copy]).dup
-                else
-                  Formula.new(formula_params)
-                end
+    puts "params[:requested_user]: user ##{params[:requested_user]}" if params[:requested_user]
+    puts "params[:copy]: formula ##{params[:copy]}" if params[:copy]
 
-    if params[:copy]
-      @formula.client_id = current_user.id if current_user.client?
-      # if formula is being copied from another artist, assign new artist ID
-      @formula.artist_id = current_user.id if current_user.artist?
+    if params[:copy] # update artist info
+      @formula = Formula.find(params[:copy]).dup
+      @formula.artist_id = current_user.id
+      @formula.author_name = current_user.full_name
+    elsif params[:requested_user]
+      puts "requested user:"
+      puts params[:requested_user]
+      @formula = current_user.guest_formulas.new(formula_params)
+      @formula.client_id = params[:requested_user]
+      @formula.client_name = User.find(@formula.client_id).full_name
+    else
+      @formula = current_user.guest_formulas.new(formula_params)
+      @formula.parse_client
     end
+
 
 
     if @formula.save
       flash[:notice] = params[:copy] ? "Formula successfully copied" : "NEW Formula saved!"
       redirect_to current_user.artist? ? @formula : current_user
     else
+      puts @formula.errors.full_messages
       flash[:alert] = "Error saving formula, please try again."
-      redirect_to request.referrer
+      render 'new'
     end
 
   end
+
+  ############## EDIT
 
   def edit
     @formula = Formula.find(params[:id])
@@ -123,7 +120,7 @@ class FormulasController < ApplicationController
   private
 
   def formula_params
-    params.require(:formula).permit(:artist_id, :client_id, :formulation, :service_type)
+    params.require(:formula).permit(:artist_id, :client_id, :formulation, :service_type, :client_name)
   end
 
 end

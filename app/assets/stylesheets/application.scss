@@ -423,6 +423,7 @@ textarea {
     font-size: xx-large;
     z-index: -10;
     opacity: .5;
+    overflow-x: hidden;
     span {
       text-shadow: 1px 1px 0px rgb(255, 255, 255)
     }
@@ -560,7 +561,7 @@ table.formula-history {
 }
 
 @media (max-width: $screen-xs-max) {
-  
+
     #sidebar {
       max-height: 150px;
       overflow-y: scroll;

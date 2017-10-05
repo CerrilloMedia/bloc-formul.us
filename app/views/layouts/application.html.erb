@@ -30,11 +30,18 @@
             <span class="icon-bar"></span>
           </button>
 
-          <div class="navbar-text">
-            <ul class="navbar-nav list-inline">
-              <li class="navbar-link">QuickJot</li>
-            </ul>
-          </div>
+          <% if current_user && current_user.artist? %>
+            <div class="navbar-text">
+              <ul class="navbar-nav list-inline text-center">
+                <li class="navbar-link">
+                    <%= link_to new_formula_path do %>
+                      <span class="hidden-xs" >QuickJot </span>
+                      <i class="fa fa-lg fa-plus-circle"></i>
+                    <% end %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
 
         </div>
 

@@ -1,13 +1,35 @@
 <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-    <div class="text-center">
-      <i class="fa fa-edit"></i> new formula for <%= @user.full_name %>
-    </div>
   <div class="panel-body">
     <div class="panel-body text-center formula-form">
 
       <%= form_for Formula.new do |f| %>
-        <%= f.number_field :artist_id, value: params[:artist_id], disabled: false, type: 'hidden' %>
-        <%= f.number_field :client_id, value: params[:client_id], disabled: false, type: 'hidden'  %>
+
+        <%= f.number_field :artist_id, value: current_user.id, disabled: false, type: 'hidden' %>
+        <div class="col-sm-10 col-sm-offset-1 text-center row panel-body">
+
+            <i class="fa fa-edit"></i> new formula <% if @user %><%= @user.full_name %> <% end %>
+            <div class="">
+
+              <% if @user %>
+                <%= f.number_field :client_id, value: @user.id, disabled: false, type: 'hidden'  %>
+                <%= f.number_field :client_name, value: @user.full_name, disabled: false, type: 'hidden'  %>
+              <% else %>
+
+                <div class="new-user-link">
+                  <%= f.collection_select(:client_id, current_user.salon_users.order(:last_name), :id, :full_name, { prompt: "Client list" }, { class: 'form-control' } ) %>
+                  <span class="col-xs-12">OR add new</span>
+                  <div class="input-group">
+                    <span class="input-group-addon">New client:</span>
+                    <%= f.text_field :client_name, placeholder: " e-mail", class: 'form-control' %>
+                  </div>
+                </div>
+
+              <% end %>
+              
+          </div>
+        </div>
+
+
 
         <div class="form-group row">
           <div class="col-sm-10 col-sm-offset-1 formula-card wht-bg"><div class="formula-card-header row">f</div>
@@ -18,7 +40,11 @@
         </div>
         <div class="form-group">
           <%= submit_tag "save", class: 'btn btn-success' %>
-          <%= link_to "cancel", user_path(params[:client_id]), class: 'btn btn-danger', data: {confirm: "return to client profile?" } %>
+          <% if @user %>
+            <%= link_to "cancel", @user , class: 'btn btn-danger', data: {confirm: "return to client profile?" } %>
+          <% else %>
+            <%= link_to "cancel", current_user, class: 'btn btn-danger', data: {confirm: "return to client profile?" } %>
+          <% end %>
         </div>
       <% end %>
     </div>

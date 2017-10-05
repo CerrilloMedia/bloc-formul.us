@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   def index
 
     @users =  if current_user.artist?
-                  User.confirmed_client
+                  # User.confirmed_client
+                  User.all
               elsif current_user.client?
                   User.confirmed_artist
               else

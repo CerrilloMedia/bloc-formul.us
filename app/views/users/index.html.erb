@@ -5,7 +5,7 @@
           <%= pluralize(@users.count, "artist") %>
         <% elsif current_user.artist? %>
           <%= pluralize(@users.count, "client") %>
-        <% else %>
+        <% elsif current_user.admin? %>
             All <%= pluralize(@users.count, "users") %>
         <% end %>
   </div>

@@ -2,7 +2,7 @@ class SalonConnectionsController < ApplicationController
 
   def create
 
-      @salon_connection = if current_user.artist? || current_user.admin?
+        @salon_connection = if current_user.artist? || current_user.admin?
                               current_user.salon_connections.build(salon_user_id: params[:salon_user_id])
                           else
                               current_user.inverse_salon_connections.build(user_id: params[:salon_user_id])
@@ -17,7 +17,7 @@ class SalonConnectionsController < ApplicationController
       else
         flash[:alert] = "Error connecting to user"
         @salon_connection.errors.full_messages
-        redirect_to request.referrer
+        redirect_to request.referrer || @user
 
       end
   end
