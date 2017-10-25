@@ -1,0 +1,56 @@
+
+<table class="table services-list">
+    <tr class="btn-scrollable">
+        <th class="text-left">
+          <span class="visible-xs">past <%= pluralize(formulas.size, ' formula') %></span>
+          <span class="hidden-xs">services</span>
+        </th>
+        <th class="t-date text-right hidden-xs">date</th>
+        <th class="t-date text-right visible-xs">
+          <span class="visible-xs pull-right">
+              scroll <i class="fa fa-sort"></i>
+          </span>
+        </th>
+    </tr>
+
+   <% formulas.each do |formula| %>
+      <tr data-formula-id="<%= formula.id %>"
+          data-formulation="<%= formula.formulation %>"
+          data-formula-service="<%= formula.service_type %>"
+          data-formula-date="<%= format_datetime(formula.created_at, 'md') %>"
+          data-is-author="<%= current_user.id == formula.artist_id %>"
+          data-formula-author="<%= formula.get_author_name %>"
+          data-formula-client="<%= formula.get_client_name if formula.client_id %>"
+          class= <%= "sidebar-bg" if formulas.first == formula %> >
+          <td class="text-left">
+            <%= link_to formula_path(formula), class: '' do %>
+              <%= formula.service_type %>
+            <% end %>
+          </td>
+          <td class="t-date text-right"><%= format_datetime(formula.created_at, 'md') %></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="td-no-border-top hidden-xs">
+            <% if current_user.artist? %>
+                <% if current_user.author?(formula) %>
+                  <span class="text-muted small">for:
+                    <%= link_to user_path(formula.client_id) do %>
+                      <%= formula.get_client_name %>
+                    <% end %>
+                  </span>
+                <% else %>
+                  <span class="text-muted small">by: <%= formula.author_name %> </span>
+                <% end %>
+            <% else %>
+                <span class="text-muted small">by:
+                  <%= link_to user_path(formula.artist_id) do %>
+                    <%= formula.get_author_name %>
+                  <% end %>
+                </span>
+            <% end %>
+
+          </td>
+      </tr>
+   <% end %>
+
+  </table>

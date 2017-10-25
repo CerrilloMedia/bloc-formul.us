@@ -20,7 +20,7 @@
 
         <div class="navbar-header">
 
-          <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand', title: 'Formulus' do %>
+          <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand hidden-xs', title: 'Formulus' do %>
             formul.us
           <% end %>
 
@@ -32,10 +32,10 @@
 
           <% if current_user && current_user.artist? %>
             <div class="navbar-text">
-              <ul class="navbar-nav list-inline text-center">
+              <ul class="navbar-nav list-inline text-left">
                 <li class="navbar-link">
                     <%= link_to new_formula_path do %>
-                      <span class="hidden-xs" >QuickJot </span>
+                      QuickJot
                       <i class="fa fa-lg fa-plus-circle"></i>
                     <% end %>
                 </li>
@@ -69,6 +69,7 @@
             </ul>
           </div>
       </nav>
+
     </div>
 
     <!-- Flash Notices & Alerts -->
@@ -121,8 +122,8 @@
               <li>
                 <%= link_to new_user_session_path, class: "", title: 'Log-in' do %>
                 Sign-in <span class="glyphicon glyphicon-log-in text-default"></span>
-              <% end %>
-            </li>
+                <% end %>
+              </li>
             <% else %>
               <li><%= link_to "edit account", edit_user_registration_path, class: '' %></li>
               <li>

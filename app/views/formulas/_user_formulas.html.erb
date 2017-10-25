@@ -1,0 +1,36 @@
+<% formulas.each do |formula| %>
+  <tr>
+    <td class="col-xs-2 col-md-2 col-lg-1 small">
+      <%= format_datetime(formula.created_at, 'mdy') %>
+    </td>
+    <td class="col-xs-12 col-md-10 col-lg-11 h4">
+      <%= link_to formula_path(formula), class: '' do %>
+        <%= formula.service_type %>
+        <br>
+        <strong><span class="hidden-xs" data-formula-id="<%= formula.id %>"><%= formula.formulation %><br></span></strong>
+      <% end %>
+      <% if @user.client? %>
+        <small><i>artist: <%= formula.get_author_name %></i></small>
+      <% else %>
+        <small><i>guest: <%= link_to formula.get_client_name, user_path(formula.client_id) %></i></small>
+      <% end %>
+    </td>
+  <% if current_user %>
+    <td>
+      <div class="user-links">
+        <% if connection_ids.include?(user.id) %>
+          <% if current_user.author?(formula) %>
+            <%= link_to edit_formula_path(formula.id), class:"btn btn-sm btn-default ml-1 col-xs-12", title:"edit formula" do %>
+              <%= icon('pencil-square-o') %><span class="hidden-xs"> edit</span>
+            <% end %>
+          <% end %>
+          <%= link_to formulas_path(copy: formula.id), method: :post, class: 'btn btn-sm btn-default ml-1 col-xs-12' do %>
+            <%= icon('copy') %><span class="hidden-xs">copy</span>
+          <% end %>
+        <% end %>
+      </div>
+    </td>
+  <% end %>
+    </td>
+  </tr>
+<% end %>
