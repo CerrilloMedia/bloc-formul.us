@@ -544,6 +544,38 @@ table.formula-history {
   }
 }
 
+// FORMUlAS#newUser
+
+.add-new-user {
+  margin-top: 1em;
+
+  .input-group-addon:first-child {
+    border-right: 0;
+    background: none !important;
+    border: none !important;
+  }
+
+  .input-group .form-control {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid $teal;
+    border-radius: 0 !important;
+    padding-left: 0.3em;
+  }
+
+  .form-control:focus {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-bottom: 1px solid #56e39f;
+    border-radius: 0 !important;
+  }
+
+
+}
+
+
 @media (min-width: $screen-sm-min) {
 
   #formula-formulation {

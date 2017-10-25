@@ -28,7 +28,18 @@ $(document).on('turbolinks:load', function () {
     };
 
   });
-  
+
+// FORMULAS#NEW
+  $('#formula_client_id').on('change', function() {
+  	var option = $(this).find('option:selected').val();
+  	var newUser = $('.add-new-user');
+  	if ( option == "") {
+  		newUser.show(400);
+      } else {
+  		newUser.hide(100);
+      }
+  });
+
     // TOGGLE FORMULAS#INDEX
     // $("span[data-formula-id]").closest('a').click(function(e) {
     //   e.preventDefault();
