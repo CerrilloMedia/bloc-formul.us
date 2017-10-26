@@ -19,9 +19,10 @@
                   <%= "admin-header" if current_user && current_user.admin? %>">
 
         <div class="navbar-header">
-
-          <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand hidden-xs', title: 'Formulus' do %>
-            formul.us
+          <% unless current_user %>
+            <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand', title: 'Formulus' do %>
+              formul.us
+            <% end %>
           <% end %>
 
           <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#theNavbar" aria-expanded="false">

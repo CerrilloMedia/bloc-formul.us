@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function () {
   	var option = $(this).find('option:selected').val();
   	var newUser = $('.add-new-user');
   	if ( option == "") {
-  		newUser.show(400);
+  		newUser.show(200);
       } else {
   		newUser.hide(100);
       }
