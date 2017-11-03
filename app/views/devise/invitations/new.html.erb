@@ -1,9 +1,11 @@
-<h2><%= t "devise.invitations.new.header" %></h2>
-<%= resource %>
-<%= resource_name %>
+<div class="text-xs-center col-xs-12 col-sm-8 col-sm-offset-2">
+  <div class="white-bg col-xs-12">
+  <h2><%= t "devise.invitations.new.header" %></h2>
 
 <%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-  <%= devise_error_messages! %>
+  <% if devise_error_messages! %>
+    <%= devise_error_messages! %>
+  <% end %>
 
 <% resource.class.invite_key_fields.each do |field| -%>
   <p><%= f.label field %><br />
@@ -12,3 +14,5 @@
 
   <p><%= f.submit t("devise.invitations.new.submit_button") %></p>
 <% end %>
+</div>
+</div>

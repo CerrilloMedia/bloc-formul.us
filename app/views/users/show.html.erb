@@ -76,7 +76,7 @@
                 <hr class="visible-xs">
                  <div id="formula-formulation"><%= @formula.formulation %></div>
                  <div class='formula-card-footer pull-right'>
-                    created on  <span class="formula-card-date"><%= format_datetime(@formula.created_at,'md') %></span> by <span class='formula-card-author'><%= @formula.author_name %></span>
+                    created on  <span class="formula-card-date"><%= format_datetime(@formula.created_at,'md') %></span> by <span class='formula-card-author'><%= @formula.get_author_name %></span>
                  </div>
              </div>
              <div id="formula-client-note" class="formula-note col-xs-12 well hidden">

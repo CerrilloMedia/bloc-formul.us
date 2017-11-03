@@ -1,5 +1,5 @@
 <% formulas.each do |formula| %>
-  <tr>
+  <tr class="<%= 'artist-formula-hl' if current_user.id == formula.artist_id %>">
     <td class="col-xs-2 col-md-2 col-lg-1 small">
       <%= format_datetime(formula.created_at, 'mdy') %>
     </td>

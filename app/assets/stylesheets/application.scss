@@ -22,6 +22,7 @@ $blue: #31778f;
 $teal: #56e39f;
 $navy: #364156;
 $dark-grey: #222222;
+$white: #fff;
 
 .brand {
   font-family: 'Niconne', cursive;
@@ -175,6 +176,10 @@ textarea {
 
 .wht-bg {
   background: #fff !important;
+}
+
+.wht-txt {
+  color: $white;
 }
 
 // WELCOME#INDEX
@@ -456,6 +461,9 @@ textarea {
 }
 
 table.formula-history {
+  .artist-formula-hl {
+    box-shadow: inset 3px 0px $teal;
+  }
   tbody {
     tr:not(:first-child) {
       background: rgba(255,255,255,.7);
@@ -517,7 +525,25 @@ table.formula-history {
       list-style: none;
     }
   }
+}
 
+// FORMULA - FORM ERRORS
+.form-error-messages {
+
+  header {
+    background: $teal;
+  }
+  ul {
+    text-align: left;
+    list-style: none;
+    border: 1px solid $blue;
+    li {
+      background: $white;
+      padding: 0.3em;
+      font-style: italic;
+      font-size: .85em;
+    }
+  }
 }
 
 // User#index
@@ -633,6 +659,12 @@ table.formula-history {
     }
     .navbar-nav {
       margin: inherit;
+    }
+
+    .services-list > tbody {
+      tr {
+        font-size: .9em;
+      }
     }
 }
 

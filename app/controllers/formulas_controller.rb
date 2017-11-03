@@ -53,16 +53,11 @@ class FormulasController < ApplicationController
 
   def create
 
-    puts "params[:requested_user]: user ##{params[:requested_user]}" if params[:requested_user]
-    puts "params[:copy]: formula ##{params[:copy]}" if params[:copy]
-
-    if params[:copy] # update artist info
+    if params[:copy]
       @formula = Formula.find(params[:copy]).dup
       @formula.artist_id = current_user.id
       @formula.author_name = current_user.full_name
     elsif params[:requested_user]
-      puts "requested user:"
-      puts params[:requested_user]
       @formula = current_user.guest_formulas.new(formula_params)
       @formula.client_id = params[:requested_user]
       @formula.client_name = User.find(@formula.client_id).full_name
@@ -71,15 +66,12 @@ class FormulasController < ApplicationController
       @formula.parse_client
     end
 
-
-
     if @formula.save
       flash[:notice] = params[:copy] ? "Formula successfully copied" : "NEW Formula saved!"
       redirect_to current_user.artist? ? @formula : current_user
     else
-      puts @formula.errors.full_messages
       flash[:alert] = "Error saving formula, please try again."
-      render 'new'
+      render :new
     end
 
   end
@@ -87,6 +79,7 @@ class FormulasController < ApplicationController
   ############## EDIT
 
   def edit
+
     @formula = Formula.find(params[:id])
     @user = User.find(@formula.client_id)
 
@@ -100,14 +93,16 @@ class FormulasController < ApplicationController
 
   def update
     @formula = Formula.find(params[:id])
+    @user = User.find(@formula.client_id)
     @formula.assign_attributes(formula_params)
 
-    if current_user.id == @formula.artist_id && @formula.save
+    if current_user.author?(@formula) && @formula.save
       flash[:notice] = "Formula saved!"
       redirect_to current_user.artist? ? @formula : current_user
     else
+      # flash[:alert] = @formula.errors.full_messages.join('. ')
       flash[:alert] = "Error saving formula. Please try again"
-      redirect_to request.referrer
+      render :edit
     end
 
   end
@@ -115,6 +110,19 @@ class FormulasController < ApplicationController
   def destroy
     # perhaps only if both user and have been cleared, perhaps set the id to nil? or add an attribute of active, triggered.
     #eventually check if 'triggered' in order to fully delete form the system.
+    @formula = Formula.find(params[:id])
+
+    @formula.can_delete?
+
+    if current_user.artist? && @formula.pending_deletion_by_guest?
+      @formula.delete
+    elsif current_user.guest?  && @formula.pending_deletion_by_artist?
+      @formula.delete
+    else
+      @formula.pending_deletion_by_artist
+    end
+
+
   end
 
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826234113) do
+ActiveRecord::Schema.define(version: 20171028173937) do
 
   create_table "formulas", force: :cascade do |t|
     t.integer  "artist_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170826234113) do
     t.string   "service_type"
     t.string   "author_name"
     t.string   "client_name"
+    t.integer  "status"
   end
 
   create_table "salon_connections", force: :cascade do |t|

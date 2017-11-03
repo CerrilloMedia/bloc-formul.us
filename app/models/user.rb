@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, presence: true, length: { maximum: 20 }
   validates_format_of :email, with: email_regexp
 
-  enum role: [:client, :artist, :admin]
+  enum role: [:client, :artist, :premium, :admin]
 
   # scope :confirmed_client, -> { where("confirmed_at IS NOT NULL AND role = 0") }
   scope :confirmed_artist, -> { where("confirmed_at IS NOT NULL AND role = 1") }

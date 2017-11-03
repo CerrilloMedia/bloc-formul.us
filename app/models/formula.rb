@@ -3,15 +3,17 @@ class Formula < ActiveRecord::Base
     belongs_to :user
 
     validates :artist_id,           presence: true
-    validates :formulation,         presence: true, length: { minimum: 5, maximum: 160 }
+    validates :client_id,           presence: true
     validates :author_name,         presence: true
-    validates :service_type,        presence: true, length: { minimum: 5, maximum: 50}
+    validates :formulation,         presence: true, length: { minimum: 5, maximum: 160 }
+    validates :service_type,        presence: true, length: { minimum: 5, maximum: 50 }
 
-    before_validation :set_names, on: :create
-    after_create :set_salon_connection
+    before_validation :set_names, on: [:create, :update]
+    after_create :set_salon_connection, :set_status
 
     before_validation :trim_whitespace, on: [:create,:update]
-    # before_validation :check_for_self
+
+    enum status: [:draft, :published, :pending_deletion_by_guest, :pending_deletion_by_artist]
 
     default_scope { order('id DESC') }
 
@@ -49,7 +51,7 @@ class Formula < ActiveRecord::Base
         sc = current_user.salon_connections.new(salon_user_id: formula.client_id)
         sc.save
         formula.salon_connection_id = sc.id
-        
+
       elsif clients.size > 1
         # if more than one guest exists, assign them to an instance variable for users to choose from
         # possibly through a modal and adjusted in jquery?
@@ -72,7 +74,15 @@ class Formula < ActiveRecord::Base
 
     def set_salon_connection
         # set connection attribute in formula if already connected
-        self.salon_connection_id = current_match.first.id
+        self.salon_connection_id = self.current_match.first.id
+    end
+
+    def publish
+      self.published!
+    end
+
+    def set_status
+      self.draft!
     end
 
     def set_names
@@ -84,7 +94,5 @@ class Formula < ActiveRecord::Base
     def trim_whitespace
       self.formulation = self.formulation.strip
     end
-
-
 
 end

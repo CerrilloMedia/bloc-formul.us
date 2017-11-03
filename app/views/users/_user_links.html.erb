@@ -1,6 +1,5 @@
 <div class="">
-
-  <% if connection_ids.include?(user.id) %>
+  <% if current_user.salon_users.include?(user) || current_user.inverse_salon_users.include?(user) %>
 
       <% if current_user.artist? %>
           <% if formula %>
@@ -32,7 +31,7 @@
         <% end %>
 
 
-        <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success blue-border', method: :delete, title: "Remove Connection" do %>
+        <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success blue-border', method: :delete, title: "Remove Connection", data: { confirm: "disconnect from #{user.full_name}"} do %>
           <i class="fa fa-user-times"></i>
         <% end %>
 

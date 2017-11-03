@@ -26,13 +26,14 @@
                           <% end %>
                       </div>
                   <div class="text-right col-xs-12 user-links pull-right row">
-                      <% if connection_ids.include?(user.id) %>
+
+                      <% if current_user.salon_users.include?(user) || current_user.inverse_salon_users.include?(user) %>
                           <% if current_user.artist? %>
                                   <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default', title: 'New Formula' do %>
                                       <%= icon('pencil-square-o') %><span class="hidden-xs"> New <span class="hidden-sm">Formula</span></span>
                                   <% end %>
                           <% end %>
-                          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete" do %>
+                          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete", data: {confirm: "remove #{user.full_name} from connections?"} do %>
                               <i class="fa fa-user-times"></i>
                           <% end %>
 

@@ -3,6 +3,11 @@
         Edit profile info for: <%= @user.email %>
     </div>
 
+    <div class="">
+      Total guest formulas:
+      <%= @user.guest_formulas.count %>
+    </div>
+
     <%= link_to "edit", edit_user_registration_path %>
     <%= link_to "edit password", edit_user_password_path(@user) %>
 

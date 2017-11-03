@@ -5,20 +5,17 @@ class UsersController < ApplicationController
   def index
 
     @users =  if current_user.artist?
-                  # User.confirmed_client
-                  User.all
+                  # client list
+                  current_user.salon_users
               elsif current_user.client?
-                  User.confirmed_artist
+                  current_user.inverse_salon_users
               else
-                  User.all
+                  User.all # admin view
               end
 
-    @connection_ids = current_user.connection_ids
-
-    if params[:search]
-      @users = @users.search(params[:search]) unless params[:search].strip.empty?
-    else
-      params[:search] = ""
+    unless params[:search].nil? || params[:search].strip.empty?
+      array = User.search(params[:search].strip)
+      @users = array.flatten.delete_if { |i| i.id === current_user.id }
     end
 
     if params[:email] && @users.empty?
@@ -65,8 +62,13 @@ class UsersController < ApplicationController
 
   end
 
-  def edit
-    @user = User.find(current_user.id)
+  def edit    # non Devise edit page which also contains a dashboard like info
+
+    @user = User.find(params[:id])
+    unless current_user == @user
+      flash[:alert] = "You do not have access to this profile"
+      redirect_to edit_user_path(current_user)
+    end
   end
 
 end
