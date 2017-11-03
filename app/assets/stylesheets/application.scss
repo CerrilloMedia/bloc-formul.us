@@ -463,6 +463,11 @@ textarea {
 table.formula-history {
   .artist-formula-hl {
     box-shadow: inset 3px 0px $teal;
+
+    .user-links a:first-child {
+      margin-bottom: .2em;
+    }
+
   }
   tbody {
     tr:not(:first-child) {
