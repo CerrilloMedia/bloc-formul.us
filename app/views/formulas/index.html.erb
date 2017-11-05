@@ -4,7 +4,12 @@
 <div class="panel-heading">
   <div class="panel-body">
     <h4>Complete formula history
-    <% if @user.artist? && !current_user.is_self?(@user)%>with<% else %>for<% end %>
+
+      <% if current_user.artist? && !current_user.is_self?(@user) %>
+        for
+      <% elsif @user.client? || @user.artist? %>
+        with
+      <% end %>
 
       <%= link_to user_path(@user), class: '' do %>
         <strong class=""><%= @user.full_name %></strong>

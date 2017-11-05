@@ -100,3 +100,7 @@
         <% end %>
      </div>
  </div>
+
+ <% if current_user.artist? && current_user != @user %>
+  <%= render partial: 'formulas/quickjot', locals: { user: @user } %>
+ <% end %>

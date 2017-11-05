@@ -671,10 +671,27 @@ table.formula-history {
         font-size: .9em;
       }
     }
+    .qj-section {
+      display: none;
+    }
+
+
 }
 
 @media (max-width: 420px) {
-
+  .qj-section {
+    display: block;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 70px;
+    .qj-button {
+      display: inline;
+      position: relative;
+      bottom: 20px;
+      z-index: 99;
+    }
+  }
 
   #error_explanation {
         margin: 7px;

@@ -21,7 +21,8 @@ class FormulasController < ApplicationController
                   # when artist visits any client page it shows clients entire general history
                   @user.formulas.first(6)
                 when current_user.artist? && @user.artist?
-                  @user.guest_formulas
+                  # when artists visits another artists page it shows all users OWN formulas, not their clients
+                  @user.formulas
                 end
 
     @connection_ids = current_user.connection_ids
