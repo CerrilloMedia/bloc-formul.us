@@ -21,7 +21,7 @@
 
         <div class="navbar-header">
 
-          <% unless current_user %>
+          <% if current_user %>
             <%= link_to user_path(current_user), class: 'navbar-brand', title: 'Formulus' do %>
               f<span class="hidden-xs">ormul.us</span>
             <% end %>
