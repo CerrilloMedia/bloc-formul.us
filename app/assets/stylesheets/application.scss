@@ -300,6 +300,7 @@ textarea {
 #main-panel {
 // background: rgba(231, 209, 55, 0.71);
  height: 100%;
+ float: right;
 }
 
 .main-body {
@@ -371,6 +372,9 @@ textarea {
       padding: .5em;
       font-size: 1.5em;
       line-height: 1em;
+      span {
+        font-family: 'Niconne', cursive;
+      }
     }
     a.navbar-brand {
       color: white;
@@ -382,7 +386,7 @@ textarea {
 }
 
 .artist-header {
-  box-shadow: inset 0px -4px 0px #56E3A0;
+  box-shadow: 0px 4px 0px #56E3A0;
   border: transparent;
 }
 
@@ -606,6 +610,10 @@ table.formula-history {
 
 }
 
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
 
 @media (min-width: $screen-sm-min) {
 
@@ -631,10 +639,11 @@ table.formula-history {
     }
 
     #main-panel {
-      box-shadow: 0px 0px 20px 20px #f6f6f6;
+      
       border-top: 1px solid #f6f6f6 !important;
       box-sizing: border-box;
       background-color: #f6f6f6;
+      float: none;
     }
 
     .alert {
@@ -681,16 +690,16 @@ table.formula-history {
 @media (max-width: 420px) {
   .qj-section {
     display: block;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    bottom: 70px;
-    .qj-button {
-      display: inline;
-      position: relative;
-      bottom: 20px;
-      z-index: 99;
-    }
+    // position: absolute;
+    // text-align: center;
+    // width: 100%;
+    // bottom: 70px;
+    // .qj-button {
+    //   display: inline;
+    //   position: relative;
+    //   bottom: 20px;
+    //   z-index: 99;
+    // }
   }
 
   #error_explanation {
@@ -777,6 +786,10 @@ table.formula-history {
 
   .splash-jumbotron {
     font-size: .7em;
+  }
+
+  .mb-0 {
+    margin-bottom: 0 !important;
   }
 
 }

@@ -1,13 +1,17 @@
-
-  <div class="visible-xs">
-    <div class="qj-section">
-      <div class="qj-button blue-border">
-      <%= link_to controller: "formulas", action: :new, requested_user: user.id do %>
-
+<div class="col-xs-12 text-center visible-xs">
+  <div class="qj-section">
+    <div class="qj-button blue-border">
+      <% if current_user == user %>
+        <%= link_to controller: "formulas", action: :new do %>
+            <i class="fa fa-plus-circle fa-lg fa-3x"></i><br>
+            New Formula
+        <% end %>
+      <% else %>
+        <%= link_to controller: "formulas", action: :new, requested_user: user.id do %>
           <i class="fa fa-plus-circle fa-lg fa-3x"></i><br>
-          New Formula
-
-    <% end %>
+          <span class="">New Formula for<br><%= "#{user.full_name}" %></span>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-  </div>
-  </div>
+</div>

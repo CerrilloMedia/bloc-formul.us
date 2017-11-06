@@ -1,25 +1,5 @@
  <div class="col-xs-12 col-lg-10 col-lg-offset-1 dashboard">
 
-     <div id="sidebar" class="col-sm-3">
-
-            <div id="history-list" class="panel-body row">
-
-              <h4>
-                <% if @formulas %>
-                  <span class="pull-left hidden-xs" ><%= pluralize(@formulas.size, 'formula') %></span>
-                <% else %>
-                  no formulas available
-                <% end %>
-              </h4>
-
-              <% if @formulas %>
-                <%= render partial: 'user_sidebar', locals: { formulas: @formulas } %>
-              <% else %>
-                <hr>
-              <% end %>
-            </div>
-
-     </div>
 
      <div class="col-xs-12 col-sm-9" id="main-panel">
 
@@ -99,8 +79,30 @@
           <hr >
         <% end %>
      </div>
+
+          <div id="sidebar" class="col-sm-3">
+
+                 <div id="history-list" class="panel-body row">
+
+                   <h4>
+                     <% if @formulas %>
+                       <span class="pull-left hidden-xs" ><%= pluralize(@formulas.size, 'formula') %></span>
+                     <% else %>
+                       no formulas available
+                     <% end %>
+                   </h4>
+
+                   <% if @formulas %>
+                     <%= render partial: 'user_sidebar', locals: { formulas: @formulas } %>
+                   <% else %>
+                     <hr>
+                   <% end %>
+                 </div>
+
+          </div>
+
  </div>
 
- <% if current_user.artist? && current_user != @user %>
+ <% if current_user.artist? %>
   <%= render partial: 'formulas/quickjot', locals: { user: @user } %>
  <% end %>

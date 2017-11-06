@@ -20,9 +20,14 @@
                   <%= "admin-header" if current_user && current_user.admin? %>">
 
         <div class="navbar-header">
+
           <% unless current_user %>
-            <%= link_to ( current_user ? user_path(current_user) : root_path ), class: 'navbar-brand', title: 'Formulus' do %>
-              formul.us
+            <%= link_to user_path(current_user), class: 'navbar-brand', title: 'Formulus' do %>
+              f<span class="hidden-xs">ormul.us</span>
+            <% end %>
+          <% else %>
+            <%= link_to root_path, class: 'navbar-brand', title: 'Formulus' do %>
+              f<span class="hidden-xs">ormul.us</span>
             <% end %>
           <% end %>
 
@@ -32,25 +37,12 @@
             <span class="icon-bar"></span>
           </button>
 
-          <% if current_user && current_user.artist? %>
-            <div class="navbar-text">
-              <ul class="navbar-nav list-inline text-xs-center">
-                <li class="navbar-link">
-                    <%= link_to new_formula_path do %>
-                      QuickJot
-                      <i class="fa fa-lg fa-plus-circle"></i>
-                    <% end %>
-                </li>
-              </ul>
-            </div>
-          <% end %>
-
         </div>
 
           <div class="navbar-collapse collapse" id="theNavbar">
             <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
-                <li class="nav-item">
+                <li class="nav-item float-sm-right">
                   <%= link_to users_path, class: 'nav-link' do %>
                     <% if current_user.artist? %>
                       <i class="fa fa-users"></i> Clients
@@ -61,7 +53,7 @@
                     <% end %>
                   <% end %>
                 </li>
-                <li class="nav-item text-right">
+                <li class="nav-item float-sm-right">
                   <%= link_to user_path(current_user), class: 'nav-link', title: "home" do %>
                     <i class="fa fa-user-circle"></i> Home
                   <% end %>

@@ -2,7 +2,7 @@
 
   <% users.each_with_index do |user, index| %>
       <div class="col-xs-12 col-sm-6 col-md-4 panel-body">
-          <div class="panel teal-border wht-bg">
+          <div class="panel teal-border wht-bg mb-0">
               <div class="panel-body">
                       <div class="pull-left">
                           <%= link_to user_path(user) do %>
@@ -29,12 +29,12 @@
 
                       <% if current_user.salon_users.include?(user) || current_user.inverse_salon_users.include?(user) %>
                           <% if current_user.artist? %>
-                                  <%= link_to new_formula_path(requested_user: user), class: 'btn btn-default', title: 'New Formula' do %>
+                                  <%= link_to new_formula_path(requested_user: user), class: 'btn btn-danger', title: 'New Formula' do %>
                                       <%= icon('pencil-square-o') %><span class="hidden-xs"> New <span class="hidden-sm">Formula</span></span>
                                   <% end %>
                           <% end %>
                           <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete", data: {confirm: "remove #{user.full_name} from connections?"} do %>
-                              <i class="fa fa-user-times"></i>
+                              <i class="fa fa-times"></i>
                           <% end %>
 
                       <% else %>
