@@ -1,7 +1,11 @@
 <div class="">
-  <% if current_user.salon_users.include?(user) || current_user.inverse_salon_users.include?(user) %>
 
+  <!-- if current user has guests or clients -->
+  <% if current_user.salon_users.include?(user) || current_user.inverse_salon_users.include?(user) || current_user.is_self?(user) %>
+
+      <!-- if current_user is an artist? -->
       <% if current_user.artist? %>
+
           <% if formula %>
               <!--copy-->
               <%= link_to formulas_path(copy: formula.id), id: 'formula-copy', method: :create, class: 'btn btn-sm btn-default' do %>
@@ -16,9 +20,11 @@
 
           <% end %>
             <!--new-->
+          <% if !current_user.is_self?(user) %>
             <%= link_to new_formula_path(requested_user: user), id: 'formula-new' ,class: 'btn btn-sm btn-default hidden-xs' do %>
               <%= icon('pencil-square-o') %> <span class="">create <span class="hidden-sm">new </span>formula</span>
             <% end %>
+          <% end %>
 
       <% end %>
 
@@ -30,9 +36,10 @@
           <% end %>
         <% end %>
 
-
-        <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success blue-border', method: :delete, title: "Remove Connection", data: { confirm: "disconnect from #{user.full_name}"} do %>
-          <i class="fa fa-user-times"></i>
+        <% if !current_user.is_self?(user) %>
+          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-sm btn-success blue-border', method: :delete, title: "Remove Connection", data: { confirm: "disconnect from #{user.full_name}"} do %>
+            <i class="fa fa-user-times"></i>
+          <% end %>
         <% end %>
 
       </div>

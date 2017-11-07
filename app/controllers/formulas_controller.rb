@@ -47,7 +47,7 @@ class FormulasController < ApplicationController
     @formula = current_user.guest_formulas.new
 
     if params[:requested_user]
-      @user = User.find(params[:requested_user])
+        @user = User.find(params[:requested_user])
     end
 
   end
