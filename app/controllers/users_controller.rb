@@ -5,17 +5,22 @@ class UsersController < ApplicationController
   def index
 
     @users =  if current_user.artist?
-                  # client list
-                  current_user.salon_users
+                  current_user.salon_users # client list
               elsif current_user.client?
-                  current_user.inverse_salon_users
+                  User.all.where(role: 1) # display artists
               else
                   User.all # admin view
               end
 
     unless params[:search].nil? || params[:search].strip.empty?
       array = User.search(params[:search].strip)
-      @users = array.flatten.delete_if { |i| i.id === current_user.id }
+      @users =  if current_user.client?
+                  # display only artists
+                  array.flatten.delete_if { |i| i.id === current_user.id || i.client? }
+                else
+                  # dispay artists and clients
+                  array.flatten.delete_if { |i| i.id == current_user.id }
+                end
     end
 
     if params[:email] && @users.empty?
