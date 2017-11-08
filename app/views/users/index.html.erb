@@ -14,7 +14,7 @@
       <%= render partial: 'user_search', locals: { user: current_user } %>
   </div>
 </div>
-<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+<div id="user-listing" class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
   <hr>
     <%= render partial: 'user_listing', locals: { users: @users, connection_ids: @connection_ids } %>
 </div>

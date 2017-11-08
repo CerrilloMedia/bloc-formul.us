@@ -33,7 +33,7 @@
                                       <%= icon('pencil-square-o') %><span class="hidden-xs"> New <span class="hidden-sm">Formula</span></span>
                                   <% end %>
                           <% end %>
-                          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-danger', method: :delete, title: "Delete", data: {confirm: "remove #{user.full_name} from connections?"} do %>
+                          <%= link_to salon_connection_path(id: user.id), class: 'btn btn-success', method: :delete, title: "Delete", data: {confirm: "remove #{user.full_name} from connections?"} do %>
                               <i class="fa fa-times"></i>
                           <% end %>
 
