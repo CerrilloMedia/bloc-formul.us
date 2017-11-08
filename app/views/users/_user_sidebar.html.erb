@@ -32,7 +32,9 @@
         <tr>
           <td colspan="2" class="td-no-border-top hidden-xs">
             <% if current_user.artist? %>
-                <% if current_user.author?(formula) %>
+                <% if formula.client_id == formula.artist_id %>
+                  <span class="text-muted small text-right"> personal </span>
+                <% elsif current_user.author?(formula) %>
                   <span class="text-muted small">for:
                     <%= link_to user_path(formula.client_id) do %>
                       <%= formula.get_client_name %>

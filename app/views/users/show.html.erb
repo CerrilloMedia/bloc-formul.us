@@ -6,7 +6,7 @@
          <% if current_user.is_self?(@user) %>
           <div class="visible-xs text-center">
               <%= link_to user_formulas_path(@user), class: 'btn btn-sm btn-default', title: "User History" do %>
-                  <i class="fa fa-book"></i> Complete History
+                  <i class="fa fa-book"></i> Guest Formulas
               <% end %>
           </div>
         <% end %>

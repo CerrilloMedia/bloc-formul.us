@@ -9,7 +9,7 @@
           <% if formula %>
               <!--copy-->
               <%= link_to formulas_path(copy: formula.id), id: 'formula-copy', method: :create, class: 'btn btn-sm btn-default' do %>
-                <%= icon('copy') %> <span class="hidden-xs">copy <span class="hidden-sm">latest</span> formula</span>
+                <%= icon('copy') %> <span class="hidden-xs">copy <span class="hidden-sm">this</span> formula</span>
               <% end %>
               <!--edit-->
               <% if current_user.author?(formula) %>
