@@ -579,6 +579,17 @@ table.formula-history {
   }
 }
 
+// USER#index
+#user-listing {
+  .panel {
+    transition: all 150ms ease-in-out;
+  }
+  .panel:hover {
+    background: rgba(49, 119, 142, 0.08) !important;
+    box-shadow: 3px 3px 5px rgba(0,0,0,.3);
+  }
+}
+
 // FORMUlAS#newUser
 
 .add-new-user {
@@ -639,13 +650,13 @@ table.formula-history {
     }
 
     #main-panel {
-      
+
       border-top: 1px solid #f6f6f6 !important;
       box-sizing: border-box;
       background-color: #f6f6f6;
       float: none;
     }
-    
+
     .splash-jumbotron {
       padding: 50px 0 !important;;
     }
